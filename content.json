@@ -24,7 +24,14 @@
       "reel": "A moment you realized you were overwhelmed",
       "offer": "affirm",
       "hike": "Set It Down Saturday, Nov 7. Location not picked yet.",
-      "event": ""
+      "event": "",
+      "photo": "Prop your phone against a tree at the trailhead. Walk away with your bag on, stop, set the bag down, and keep walking without it. On-screen text: Not everything has to come with me.",
+      "shots": [
+        "Wide shot of the trail or view",
+        "Close-up: a leaf, moss, water, or bark",
+        "You in the landscape (from behind is fine)",
+        "10 second video walking the trail"
+      ]
     },
     {
       "id": "2026-11-w2",
@@ -37,7 +44,14 @@
       "reel": "You can be working on yourself and still take a day off",
       "offer": "braindump",
       "hike": "Set It Down Saturday, Nov 14. Location not picked yet.",
-      "event": ""
+      "event": "",
+      "photo": "Prop your phone on a rock or bench. Sit, close your eyes, take one slow breath, then open them and look out at the view. On-screen text: Nothing needs solving right now.",
+      "shots": [
+        "Wide shot of the trail or view",
+        "Close-up: a leaf, moss, water, or bark",
+        "You in the landscape (from behind is fine)",
+        "10 second video walking the trail"
+      ]
     },
     {
       "id": "2026-11-w3",
@@ -50,7 +64,14 @@
       "reel": "Sometimes you don't need another deep conversation. You need to laugh with somebody.",
       "offer": "group",
       "hike": "Set It Down Saturday, Nov 21. Location not picked yet.",
-      "event": "Craft and play night at The Old Place, Pelham. Tentative until the venue replies."
+      "event": "Craft and play night at The Old Place, Pelham. Tentative until the venue replies.",
+      "photo": "Film two sets of hands passing something small: a pressed leaf, a cup, a craft piece. Craft night if it happens, the walk if not. On-screen text: Connection can be this simple.",
+      "shots": [
+        "Wide shot of the trail or view",
+        "Close-up: a leaf, moss, water, or bark",
+        "You in the landscape (from behind is fine)",
+        "10 second video walking the trail"
+      ]
     },
     {
       "id": "2026-11-w4",
@@ -63,17 +84,32 @@
       "reel": "A short personal lesson from this month",
       "offer": "yearReview",
       "hike": "Thanksgiving weekend. Walk is optional this week.",
-      "event": ""
+      "event": "",
+      "photo": "Go back to the spot from Week 1 and film it from the same angle. Put the two clips side by side. On-screen text: Notice what's changing.",
+      "shots": [
+        "Wide shot of the trail or view",
+        "Close-up: a leaf, moss, water, or bark",
+        "You in the landscape (from behind is fine)",
+        "10 second video walking the trail"
+      ]
     }
   ],
   "offers": {
-    "group": { "name": "Join the Facebook group", "url": "https://www.facebook.com/share/g/1KMFVt7qZd/", "kind": "community" }
+    "group": {
+      "name": "Join the Facebook group",
+      "url": "https://www.facebook.com/share/g/1KMFVt7qZd/",
+      "kind": "community"
+    }
   },
   "queue": [
     {
       "id": "C-2611-01",
       "week": "2026-11-w1",
-      "channels": ["Instagram", "TikTok", "YouTube Shorts"],
+      "channels": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts"
+      ],
       "format": "Reel",
       "purpose": "connection",
       "source": "You, talking to camera. About 60 seconds.",
@@ -88,7 +124,9 @@
     {
       "id": "C-2611-02",
       "week": "2026-11-w1",
-      "channels": ["Facebook group"],
+      "channels": [
+        "Facebook group"
+      ],
       "format": "Group prompt",
       "purpose": "community",
       "source": "Weekly theme",
@@ -102,7 +140,10 @@
     {
       "id": "C-2611-03",
       "week": "2026-11-w1",
-      "channels": ["Podcast", "YouTube"],
+      "channels": [
+        "Podcast",
+        "YouTube"
+      ],
       "format": "Episode plan",
       "purpose": "education",
       "source": "Weekly theme",
@@ -117,7 +158,9 @@
     {
       "id": "C-2611-04",
       "week": "2026-11-w1",
-      "channels": ["Pinterest"],
+      "channels": [
+        "Pinterest"
+      ],
       "format": "Pin",
       "purpose": "conversion",
       "source": "Etsy listing: I Am Affirmations Print",
@@ -132,7 +175,9 @@
     {
       "id": "C-2611-05",
       "week": "2026-11-w1",
-      "channels": ["Instagram"],
+      "channels": [
+        "Instagram"
+      ],
       "format": "Photo post",
       "purpose": "conversion",
       "source": "Etsy listing: I Am Affirmations Print",
@@ -147,7 +192,10 @@
     {
       "id": "C-2611-06",
       "week": "2026-11-w1",
-      "channels": ["Facebook group", "Instagram"],
+      "channels": [
+        "Facebook group",
+        "Instagram"
+      ],
       "format": "Walk announcement",
       "purpose": "community",
       "source": "Set It Down Saturday, Nov 7",

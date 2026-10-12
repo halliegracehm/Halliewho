@@ -1085,7 +1085,7 @@ function renderContent(){
   $('#week-plan').innerHTML=`<div class="row two"><div><div class="t" style="font-family:var(--serif);font-size:20px">${esc(w.theme)}</div><div class="s">${range(w)}</div></div></div>`+
     line('Podcast',w.podcast)+line('Facebook group',w.group)+line('In the app',w.app)+line('Reel idea',w.reel)+
     (of?`<div class="row two"><div><div class="s">Offer to test</div><div class="t">${of.url?`<a href="${esc(of.url)}" target="_blank" rel="noopener">${esc(of.name)}</a>`:esc(of.name)}</div></div>${of.price?`<span class="price">${esc(of.price)}</span>`:''}</div>`:'')+
-    line('Walk',w.hike)+line('Event',w.event);
+    line('Walk',w.hike)+line('Event',w.event)+line('Photo idea to recreate',w.photo)+(w.shots&&w.shots.length?`<div class="row two"><div><div class="s">Hike shot list</div><div class="t">${w.shots.map(x=>'· '+esc(x)).join('<br>')}</div></div></div>`:'');
 
   // home card
   const hof=offerInfo(cur.offer);

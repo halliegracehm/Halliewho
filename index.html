@@ -232,7 +232,7 @@ button.badge{cursor:pointer}
     <button class="tab" role="tab" data-tab="podcast">Podcast</button>
     <button class="tab" role="tab" data-tab="book">Books</button>
     <button class="tab" role="tab" data-tab="products">Products</button>
-    <button class="tab" role="tab" data-tab="ember">Ember &amp; Stone</button>
+    <button class="tab" role="tab" data-tab="shelf">Innershelf Studio</button>
     <button class="tab" role="tab" data-tab="calendar">Calendar</button>
     <button class="tab" role="tab" data-tab="links">Links</button>
   </nav>
@@ -450,7 +450,7 @@ button.badge{cursor:pointer}
   <div class="card">
     <div class="row two"><div><div class="t">Find your pattern</div><div class="s">Six quizzes · email capture · each result recommends a printable</div></div><span class="badge b-done">Live</span></div>
     <div class="row two"><div><div class="t">Pages for You</div><div class="s">Personalized journal generator · $12</div></div><span class="badge b-done">Live</span></div>
-    <div class="row two"><div><div class="t">Innershelfstudio printables</div><div class="s">Etsy · seasonal pick: 2026 Year in Review + 2027 Intentions, $7</div></div><span class="badge b-done">Live</span></div>
+    <div class="row two"><div><div class="t">Innershelf Studio printables</div><div class="s">Etsy · seasonal pick: 2026 Year in Review + 2027 Intentions, $7</div></div><span class="badge b-done">Live</span></div>
     <div class="row two"><div><div class="t">Talks and services</div><div class="s">Four conversation options and three done-for-you services</div></div><span class="badge b-done">Live</span></div>
   </div>
 
@@ -462,29 +462,28 @@ button.badge{cursor:pointer}
   <div class="saved" data-saved="products"></div>
 </section>
 
-<!-- ══ EMBER & STONE ══ -->
-<section class="panel" id="panel-ember" role="tabpanel">
-  <div class="banner" style="background:var(--honey-soft)"><q>Found with Intention.</q><span style="color:var(--honey)">Ember &amp; Stone</span></div>
+<!-- ══ INNERSHELF STUDIO ══ -->
+<section class="panel" id="panel-shelf" role="tabpanel">
+  <div class="card pad" style="background:var(--cream);border-color:#EFE2D2">
+    <div class="t">Innershelf Studio <span class="s">etsy.com/shop/Innershelfstudio</span></div>
+    <div class="s">Wellness printables. Every quiz result on the site recommends one, and the seasonal pick shows to everyone.</div>
+    <div class="actions" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+      <a class="btn" href="https://www.etsy.com/your/shops/me/dashboard" target="_blank" rel="noopener">Shop manager</a>
+      <a class="btn ghost" href="https://www.etsy.com/shop/Innershelfstudio" target="_blank" rel="noopener">View the shop</a>
+    </div>
+  </div>
   <div class="stats">
-    <div class="stat"><b>0</b><span>Waitlist</span></div>
-    <div class="stat"><b>20</b><span>Founding goal</span></div>
-    <div class="stat"><b>TBD</b><span>Launch</span></div>
+    <div class="stat"><b id="sh-count">0</b><span>On the site</span></div>
+    <div class="stat"><b id="sh-picks">0</b><span>Quiz results pointing here</span></div>
+    <div class="stat"><b id="sh-low">$0</b><span>Lowest price</span></div>
   </div>
-  <h2 class="h">What goes in the box</h2>
-  <div class="card">
-    <div class="row two"><div><div class="t">Intention stone</div><div class="s">From your hikes</div></div><span class="badge b-draft">Sourcing</span></div>
-    <div class="row two"><div><div class="t">Thrift trinket</div><div class="s">With a handwritten story</div></div><span class="badge b-draft">Sourcing</span></div>
-    <div class="row two"><div><div class="t">Nature element</div><div class="s">From your walks</div></div><span class="badge b-draft">Sourcing</span></div>
-    <div class="row two"><div><div class="t">Printable</div><div class="s">From Innershelfstudio</div></div><span class="badge b-done">Ready</span></div>
-    <div class="row two"><div><div class="t">Handwritten note</div><div class="s">Carries the secret tone</div></div><span class="badge b-done">Ready</span></div>
-  </div>
-  <h2 class="h">Secret tone for the next box</h2>
-  <div class="tags" style="margin-bottom:10px"><span class="tag p">Nostalgia</span><span class="tag g">Delight</span><span class="tag r">Melancholy</span><span class="tag t2">Wonder</span><span class="tag s2">Laughter</span></div>
-  <textarea class="note" data-note="ember-tone" placeholder="Notes for this box's tone and theme..."></textarea>
-  <div class="saved" data-saved="ember-tone"></div>
-  <h2 class="h">Waitlist notes</h2>
-  <textarea class="note" data-note="ember-waitlist" placeholder="Founding 20 names, interest, outreach..."></textarea>
-  <div class="saved" data-saved="ember-waitlist"></div>
+  <h2 class="h">Printables <small>from site.config.mjs</small></h2>
+  <div class="card" id="shelf-list"></div>
+  <h2 class="h">Shop to-dos</h2>
+  <div class="card" id="shelf-checks"></div>
+  <h2 class="h">Product ideas</h2>
+  <textarea class="note" data-note="shelf-ideas" placeholder="New printables, bundles, seasonal ideas..."></textarea>
+  <div class="saved" data-saved="shelf-ideas"></div>
 </section>
 
 <!-- ══ CALENDAR ══ -->
@@ -563,7 +562,6 @@ button.badge{cursor:pointer}
     <div class="row two"><div><div class="t">Site tagline</div><div class="s">Honest questions for the patterns we carry.</div></div></div>
     <div class="row two"><div><div class="t">Look</div><div class="s">Light lilac paper, violet, rose, sage · warm cream and honey for the app · Cormorant Garamond and DM Sans</div></div></div>
     <div class="row two"><div><div class="t">Writing</div><div class="s">No em dashes · every caption ends with a CTA</div></div></div>
-    <div class="row two"><div><div class="t">Ember &amp; Stone</div><div class="s">Found with Intention.</div></div></div>
   </div>
 </section>
 
@@ -814,8 +812,8 @@ checklist($('#daily-checks'),[
   {text:'Record or prep the next episode',area:'Podcast'},
   {text:'Post or schedule Instagram content',area:'Social'},
   {text:'Write one book pour or line',area:'Books'},
-  {text:'Check Etsy listings',area:'Innershelfstudio'},
-  {text:'Ember & Stone sourcing or notes',area:'Ember & Stone'},
+  {text:'Check Etsy orders and messages',area:'Innershelf Studio'},
+  {text:'Work on an Innershelf printable',area:'Innershelf Studio'},
   {text:'Check talk bookings and inquiries',area:'Business'},
   {text:'Check My Inner Mind for new posts and reports',area:'App'}
 ],'hw-checks',{daily:true,onChange:(left,total)=>{$('#checks-count').textContent=left?`${total-left} of ${total} done`:'all done 💜'}});
@@ -869,7 +867,7 @@ $$('textarea[data-note]').forEach(ta=>{
 });
 
 // ─── Intentions ──────────────────────────────────────────────────────────────
-const intentions=['Come inside my inner world.','Fitting in is for losers.','All is well. And I will be well.','Found with Intention.','You\'re not lost. You\'re only exploring for a while.','I have never been able to be anything but myself.','We can\'t be sisters until we learn to be human.'];
+const intentions=['Come inside my inner world.','Fitting in is for losers.','All is well. And I will be well.','You\'re not lost. You\'re only exploring for a while.','I have never been able to be anything but myself.','We can\'t be sisters until we learn to be human.'];
 $('#daily-intention').textContent=intentions[Math.floor(Math.random()*intentions.length)];
 
 // ─── Calendar ────────────────────────────────────────────────────────────────
@@ -959,10 +957,45 @@ function renderBiz(cfg){
     `<div class="row two"><div><div class="s">Edit prices in site.config.mjs on GitHub. This tab, the site, and the links hub all update.</div></div><a class="badge b-draft" style="text-decoration:none" href="https://github.com/halliegracehm/halliewho-site/edit/main/site.config.mjs" target="_blank" rel="noopener">Edit</a></div>`;
 }
 
+
+// ─── Innershelf Studio: printables read live from halliewho-site ────────────
+const SHELF_FALLBACK={
+  products:{
+    emotion:{name:'21 Day Emotion Journal',price:'$5.50',url:'https://www.etsy.com/listing/4481325241/21-day-emotion-journal-wellness-workbook'},
+    braindump:{name:'Evening Brain Dump Journal Page',price:'$4.00',url:'https://www.etsy.com/listing/4484959233/evening-brain-dump-journal-page-mental'},
+    affirm:{name:'I Am Affirmations Print',price:'$4.00',url:'https://www.etsy.com/listing/4484968883/i-am-affirmations-print-positive-self'},
+    sunday:{name:'Sunday Setup Weekly Reflection',price:'$3.00',url:'https://www.etsy.com/listing/4488257562/sunday-setup-weekly-reflection-journal'},
+    grat10:{name:'10-Day Gratitude Journal',price:'$3.75',url:'https://www.etsy.com/listing/4481340072/10-day-gratitude-journal-daily'},
+    gratitude:{name:'Gratitude Journal, Volume 1',price:'$6.00',url:'https://www.etsy.com/listing/4481090029/gratitude-journal-volume-1'},
+    yearReview:{name:'2026 Year in Review + 2027 Intentions',price:'$7.00',url:'https://www.etsy.com/listing/4593392405/2026-reflection-journal-2027-intentions'}
+  },
+  picks:{"0:O":"affirm","0:C":"braindump","0:P":"affirm","0:I":"emotion","1:F":"emotion","1:C":"braindump","1:A":"affirm","1:D":"emotion","2:S":"gratitude","2:A":"affirm","2:U":"braindump","2:P":"affirm","3:A":"grat10","3:G":"emotion","3:U":"emotion","3:O":"sunday","4:L":"sunday","4:D":"emotion","4:H":"braindump","4:S":"affirm","5:E":"braindump","5:R":"sunday","5:S":"emotion","5:U":"emotion","5:C":"gratitude"},
+  seasonalPick:'yearReview'
+};
+function renderShelf(cfg){
+  const prods=cfg.products||{},picks=cfg.picks||{};
+  const counts={};Object.values(picks).forEach(k=>counts[k]=(counts[k]||0)+1);
+  const keys=Object.keys(prods).sort((a,b)=>(counts[b]||0)-(counts[a]||0));
+  $('#shelf-list').innerHTML=keys.map(k=>{const p=prods[k];const n=counts[k]||0;const seasonal=cfg.seasonalPick===k;
+    return `<div class="row two"><div><div class="t"><a href="${esc(p.url)}" target="_blank" rel="noopener" style="text-decoration:none">${esc(p.name)}</a></div><div class="s">${seasonal?'Seasonal pick, shown to everyone':n?`Recommended by ${n} quiz result${n>1?'s':''}`:'Not recommended by any quiz yet'}</div></div><span class="price">${esc(p.price)}</span></div>`}).join('')+
+    `<div class="row two"><div><div class="s">Add new listings to products in site.config.mjs and they show up on the site, the links hub, and here.</div></div><a class="badge b-draft" style="text-decoration:none" href="https://github.com/halliegracehm/halliewho-site/edit/main/site.config.mjs" target="_blank" rel="noopener">Edit</a></div>`;
+  $('#sh-count').textContent=keys.length;
+  $('#sh-picks').textContent=Object.keys(picks).length;
+  const prices=keys.map(k=>parseFloat(String(prods[k].price).replace(/[^0-9.]/g,''))).filter(n=>!isNaN(n));
+  $('#sh-low').textContent=prices.length?'$'+Math.min(...prices).toFixed(2).replace(/\.00$/,''):'';
+}
+checklist($('#shelf-checks'),[
+  {text:'Etsy SEO pass: titles, tags, and first photo on every listing'},
+  {text:'Upload the printables that never made it to Etsy'},
+  {text:'Add every live listing to products in site.config.mjs'},
+  {text:'Pick a new seasonal printable after New Year'},
+  {text:'Check how the Etsy ads are doing'}
+],'hw-shelf');
+
 // ─── Start ───────────────────────────────────────────────────────────────────
-renderEps();renderSched();renderTopics();renderChapters();renderCalendar();renderBiz(BIZ_FALLBACK);
+renderEps();renderSched();renderTopics();renderChapters();renderCalendar();renderBiz(BIZ_FALLBACK);renderShelf(SHELF_FALLBACK);
 import('https://cdn.jsdelivr.net/gh/halliegracehm/halliewho-site@main/site.config.mjs')
-  .then(m=>{if(m&&m.default)renderBiz({...BIZ_FALLBACK,...m.default})}).catch(()=>{});
+  .then(m=>{if(m&&m.default){renderBiz({...BIZ_FALLBACK,...m.default});renderShelf({...SHELF_FALLBACK,...m.default})}}).catch(()=>{});
 let start='home';
 try{start=(location.hash||'').slice(1)||sessionStorage.getItem('hw-tab')||'home'}catch(e){}
 showTab($('#panel-'+start)?start:'home');

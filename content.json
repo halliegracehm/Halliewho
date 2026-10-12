@@ -1,0 +1,162 @@
+{
+  "updated": "2026-10-11",
+  "month": {
+    "id": "2026-11",
+    "name": "November 2026",
+    "theme": "Making room for yourself",
+    "why": "Connects inner work with real-life movement, community, the app, and the year-end workbook without every post being a sales pitch."
+  },
+  "links": {
+    "group": "https://www.facebook.com/share/g/1KMFVt7qZd/",
+    "app": "https://myinnermind.halliewho.com",
+    "youtube": "https://www.youtube.com/@Myinnermindpod",
+    "links": "https://links.halliewho.com"
+  },
+  "weeks": [
+    {
+      "id": "2026-11-w1",
+      "start": "2026-11-02",
+      "end": "2026-11-08",
+      "theme": "What are you carrying?",
+      "podcast": "The mental load we carry without noticing",
+      "group": "What's one thing you wish you could set down this month?",
+      "app": "Journal prompt: three things you're carrying, and one you could set down this week",
+      "reel": "A moment you realized you were overwhelmed",
+      "offer": "affirm",
+      "hike": "Set It Down Saturday, Nov 7. Location not picked yet.",
+      "event": ""
+    },
+    {
+      "id": "2026-11-w2",
+      "start": "2026-11-09",
+      "end": "2026-11-15",
+      "theme": "You don't have to solve everything today",
+      "podcast": "Why rest feels uncomfortable when you're used to doing everything",
+      "group": "Midweek check-in: what are you letting wait this week?",
+      "app": "A short breathing exercise or evening journal entry",
+      "reel": "You can be working on yourself and still take a day off",
+      "offer": "braindump",
+      "hike": "Set It Down Saturday, Nov 14. Location not picked yet.",
+      "event": ""
+    },
+    {
+      "id": "2026-11-w3",
+      "start": "2026-11-16",
+      "end": "2026-11-22",
+      "theme": "Connection doesn't have to be complicated",
+      "podcast": "How friendships and community change as we get older",
+      "group": "Invite to craft and play night, only if The Old Place confirms",
+      "app": "One small connection challenge",
+      "reel": "Sometimes you don't need another deep conversation. You need to laugh with somebody.",
+      "offer": "group",
+      "hike": "Set It Down Saturday, Nov 21. Location not picked yet.",
+      "event": "Craft and play night at The Old Place, Pelham. Tentative until the venue replies."
+    },
+    {
+      "id": "2026-11-w4",
+      "start": "2026-11-23",
+      "end": "2026-11-29",
+      "theme": "Notice what's changing",
+      "podcast": "What you're learning about yourself this year",
+      "group": "One thing to leave behind, one thing to carry into December",
+      "app": "Year-end reflection and intentions",
+      "reel": "A short personal lesson from this month",
+      "offer": "yearReview",
+      "hike": "Thanksgiving weekend. Walk is optional this week.",
+      "event": ""
+    }
+  ],
+  "offers": {
+    "group": { "name": "Join the Facebook group", "url": "https://www.facebook.com/share/g/1KMFVt7qZd/", "kind": "community" }
+  },
+  "queue": [
+    {
+      "id": "C-2611-01",
+      "week": "2026-11-w1",
+      "channels": ["Instagram", "TikTok", "YouTube Shorts"],
+      "format": "Reel",
+      "purpose": "connection",
+      "source": "You, talking to camera. About 60 seconds.",
+      "hook": "Why you're tired on days you did nothing",
+      "script": "1. Something you need to know: most of what wears you out isn't the work. It's everything you're carrying that nobody sees.\n2. Why you need to know it: the reminders, the worrying, remembering for everyone. Your mind never gets a day off, so you feel tired even on slow days.\n3. How this helps you: tonight, write down three things you're carrying. Pick one you can set down this week. Just one.",
+      "caption": "Your mind keeps a list nobody else can see. Tonight, write down three things you're carrying and pick one to set down this week. 🎙️\n\nDrop a 💜 if this hit.",
+      "cta": "Drop a 💜 if this hit.",
+      "url": "",
+      "needs": "Record it",
+      "status": "draft"
+    },
+    {
+      "id": "C-2611-02",
+      "week": "2026-11-w1",
+      "channels": ["Facebook group"],
+      "format": "Group prompt",
+      "purpose": "community",
+      "source": "Weekly theme",
+      "hook": "What's one thing you wish you could set down this month?",
+      "caption": "What's one thing you wish you could set down this month? Big or small, it counts. No advice unless someone asks for it. Just room to say it out loud. 💜",
+      "cta": "Reply in the comments",
+      "url": "https://www.facebook.com/share/g/1KMFVt7qZd/",
+      "needs": "Review, then post Monday",
+      "status": "draft"
+    },
+    {
+      "id": "C-2611-03",
+      "week": "2026-11-w1",
+      "channels": ["Podcast", "YouTube"],
+      "format": "Episode plan",
+      "purpose": "education",
+      "source": "Weekly theme",
+      "hook": "The mental load we carry without noticing",
+      "script": "Talking points:\n1. The invisible list: what you're tracking that nobody asked you to.\n2. Why rest can feel like falling behind.\n3. A story from your own week when you noticed the load.\n4. One small way you set something down.\nTakeaway: you don't have to carry all of it to be doing life right.",
+      "caption": "",
+      "cta": "Point listeners to the app's set-it-down journal prompt",
+      "url": "https://myinnermind.halliewho.com",
+      "needs": "Record it. Send me the recording and I'll pull the clips.",
+      "status": "draft"
+    },
+    {
+      "id": "C-2611-04",
+      "week": "2026-11-w1",
+      "channels": ["Pinterest"],
+      "format": "Pin",
+      "purpose": "conversion",
+      "source": "Etsy listing: I Am Affirmations Print",
+      "hook": "I Am Affirmations Print for Hard Days",
+      "caption": "A printable affirmations page to keep where you'll see it. Simple words for the days your mind won't slow down. Instant download from Innershelf Studio.",
+      "cta": "Shop the printable",
+      "offer": "affirm",
+      "url": "",
+      "needs": "Use the listing photo, then pin",
+      "status": "draft"
+    },
+    {
+      "id": "C-2611-05",
+      "week": "2026-11-w1",
+      "channels": ["Instagram"],
+      "format": "Photo post",
+      "purpose": "conversion",
+      "source": "Etsy listing: I Am Affirmations Print",
+      "hook": "Some days you need the words written down where you can see them.",
+      "caption": "Some days you need the words written down where you can see them. The I Am Affirmations print is in the shop, link in bio.\n\nSave this if you needed it.",
+      "cta": "Save this if you needed it.",
+      "offer": "affirm",
+      "url": "",
+      "needs": "Photo of the print on your fridge or desk",
+      "status": "draft"
+    },
+    {
+      "id": "C-2611-06",
+      "week": "2026-11-w1",
+      "channels": ["Facebook group", "Instagram"],
+      "format": "Walk announcement",
+      "purpose": "community",
+      "source": "Set It Down Saturday, Nov 7",
+      "hook": "Set It Down Saturday is November 7",
+      "caption": "Set It Down Saturday is November 7. Easy pace, about an hour, come as you are. Location coming soon.\n\nDrop a 💜 if you're in.",
+      "cta": "Drop a 💜 if you're in.",
+      "url": "https://www.facebook.com/share/g/1KMFVt7qZd/",
+      "needs": "Pick the trail and approve before it goes public",
+      "status": "draft"
+    }
+  ]
+}

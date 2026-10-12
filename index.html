@@ -479,10 +479,18 @@ button.badge{cursor:pointer}
   </div>
   <h2 class="h">Printables <small>from site.config.mjs</small></h2>
   <div class="card" id="shelf-list"></div>
+  <h2 class="h">Handmade <small>tap a status to move it along</small></h2>
+  <div class="card pad" style="background:var(--cream);border-color:#EFE2D2;margin-bottom:8px">
+    <div class="s">Small things made by hand, many from what you gather on walks. Etsy lets physical pieces sit in the same shop as the printables.</div>
+  </div>
+  <div class="card" id="handmade"></div>
+  <h2 class="h">Handmade notes</h2>
+  <textarea class="note" data-note="handmade" placeholder="Materials to buy, flowers to press, pricing, packaging ideas..."></textarea>
+  <div class="saved" data-saved="handmade"></div>
   <h2 class="h">Shop to-dos</h2>
   <div class="card" id="shelf-checks"></div>
   <h2 class="h">Product ideas</h2>
-  <textarea class="note" data-note="shelf-ideas" placeholder="New printables, bundles, seasonal ideas..."></textarea>
+  <textarea class="note" data-note="shelf-ideas" placeholder="New printables, bundles, pairing a printable with a handmade piece..."></textarea>
   <div class="saved" data-saved="shelf-ideas"></div>
 </section>
 
@@ -989,8 +997,27 @@ checklist($('#shelf-checks'),[
   {text:'Upload the printables that never made it to Etsy'},
   {text:'Add every live listing to products in site.config.mjs'},
   {text:'Pick a new seasonal printable after New Year'},
-  {text:'Check how the Etsy ads are doing'}
+  {text:'Check how the Etsy ads are doing'},
+  {text:'Press a batch of flowers to have ready'},
+  {text:'Make one handmade sample and photograph it'}
 ],'hw-shelf');
+
+
+// ─── Handmade line ───────────────────────────────────────────────────────────
+const HANDMADE=[
+  {t:'Pressed flower art',s:'Framed pieces and bookmarks from flowers you press. Mod Podge decoupage on wood, jars, or coasters.'},
+  {t:'Nature prints',s:'Leaf and flower prints, botanical cyanotypes, or ink prints of what you find on walks.'},
+  {t:'Jewelry',s:'Pressed flower resin pendants, small stone or charm pieces.'},
+  {t:'Trinkets and art pieces',s:'One-of-a-kind finds, small paintings, keepsakes with a handwritten story.'},
+  {t:'Mindfulness pieces',s:'A pocket stone with a word on it, a set-it-down card, a small kit that pairs with a printable.'}
+];
+const HM_ORDER=['idea','trying','making','listed'],HM_LABEL={idea:'Idea',trying:'Trying it',making:'Making',listed:'On Etsy'},HM_CLASS={idea:'b-draft',trying:'b-rose',making:'b-up',listed:'b-done'};
+let hmState=store.get('hw-handmade',null)||HANDMADE.map(()=> 'idea');
+function renderHandmade(){
+  $('#handmade').innerHTML=HANDMADE.map((h,i)=>`<div class="row two"><div><div class="t">${esc(h.t)}</div><div class="s">${esc(h.s)}</div></div><button type="button" class="badge ${HM_CLASS[hmState[i]]}" data-hm="${i}">${HM_LABEL[hmState[i]]}</button></div>`).join('');
+  $$('[data-hm]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.hm;hmState[i]=HM_ORDER[(HM_ORDER.indexOf(hmState[i])+1)%HM_ORDER.length];store.set('hw-handmade',hmState);renderHandmade()}));
+}
+renderHandmade();
 
 // ─── Start ───────────────────────────────────────────────────────────────────
 renderEps();renderSched();renderTopics();renderChapters();renderCalendar();renderBiz(BIZ_FALLBACK);renderShelf(SHELF_FALLBACK);

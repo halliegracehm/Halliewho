@@ -4,658 +4,638 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Hallie Who">
-<title>Hallie Who — Creator Dashboard</title>
+<meta name="theme-color" content="#FCFAFE">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<title>Hallie Who | Creator Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --dp: #1a0a2e;--mp: #2d1b4e;--lp: #5c3d8f;--lav: #c9b8e8;
-  --soft: #e8e0f5;--lilac: #f3effe;--gold: #c9a84c;--sgold: #fff6dc;
-  --cream: #fdf8f2;--rose: #f5d0d8;--sage: #d6e8d6;--teal: #c8e6e6;
-  --white: #ffffff;--glass: rgba(45,27,78,0.5);
-  --border: rgba(201,184,232,0.12);--border-gold: rgba(201,168,76,0.2);
+/* Same palette as halliewho.com (lilac notebook) with the app's warm diary tones */
+:root{
+  --paper:#F3EEF8;--sheet:#FCFAFE;--white:#FFFFFF;
+  --ink:#2A1736;--muted:#5E4D6B;--faint:#8E7F9B;--rule:#E4DCEC;
+  --violet:#5B3A86;--violet-deep:#3F2560;--violet-soft:#ECE4F6;
+  --rose:#D9A5B1;--rose-soft:#F4E1E6;--rose-ink:#8E4A5C;
+  --sage:#5E7050;--sage-soft:#E3EBDD;
+  --honey:#7A4A1E;--honey-soft:#F5EADF;--cream:#FFFDF8;
+  --teal:#3E6E78;--teal-soft:#DDEDEF;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{font-size:16px}
-body{font-family:'DM Sans',sans-serif;background:var(--dp);color:var(--cream);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 20% 30%,rgba(201,184,232,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 60% 15%,rgba(201,184,232,0.3) 0%,transparent 100%),radial-gradient(1px 1px at 80% 60%,rgba(201,184,232,0.2) 0%,transparent 100%),radial-gradient(1px 1px at 40% 80%,rgba(201,168,76,0.2) 0%,transparent 100%),radial-gradient(1px 1px at 90% 40%,rgba(201,184,232,0.3) 0%,transparent 100%),radial-gradient(600px at 70% 0%,rgba(92,61,143,0.15) 0%,transparent 70%),radial-gradient(400px at 0% 100%,rgba(45,27,78,0.4) 0%,transparent 70%);pointer-events:none;z-index:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.55;min-height:100vh}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--violet);outline-offset:2px;border-radius:6px}
 
-.header{position:sticky;top:0;z-index:100;background:rgba(26,10,46,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
-.header-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:0.05em;color:var(--lav)}
-.header-sub{font-size:10px;color:rgba(201,184,232,0.5);letter-spacing:0.12em;text-transform:uppercase;margin-top:1px}
-.header-date{font-size:11px;color:rgba(201,184,232,0.4);text-align:right}
+.app{max-width:760px;margin:0 auto;background:var(--sheet);min-height:100vh;box-shadow:0 0 0 1px var(--rule)}
 
-.tabs-wrap{position:sticky;top:65px;z-index:99;background:rgba(26,10,46,0.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,184,232,0.1);overflow-x:auto;scrollbar-width:none}
-.tabs-wrap::-webkit-scrollbar{display:none}
-.tabs{display:flex;gap:0;padding:0 16px;min-width:max-content}
-.tab{padding:12px 16px;font-size:12px;font-weight:400;letter-spacing:0.04em;color:rgba(201,184,232,0.5);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;border-top:none;border-left:none;border-right:none;background:none;font-family:'DM Sans',sans-serif}
-.tab:hover{color:var(--lav)}
-.tab.active{color:var(--gold);border-bottom:2px solid var(--gold)}
+/* Header + tabs */
+.header{position:sticky;top:0;z-index:100;background:rgba(252,250,254,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.header-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:14px 18px 6px}
+.wordmark{font-family:var(--serif);font-style:italic;font-weight:500;font-size:26px;line-height:1.1;letter-spacing:-.01em}
+.wordmark small{display:block;font-family:var(--sans);font-style:normal;font-size:12px;color:var(--faint);letter-spacing:0;margin-top:2px}
+.header-date{font-size:13px;color:var(--muted);text-align:right;line-height:1.35}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 10px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:10px 10px 11px;font-size:14px;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--violet)}
+.tab[aria-selected="true"]{color:var(--violet);border-bottom-color:var(--violet);font-weight:500}
 
-.panels{position:relative;z-index:1}
-.panel{display:none;padding:20px 16px 100px}
+.panel{display:none;padding:20px 18px 110px}
 .panel.active{display:block}
 
-.section-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border-gold);margin-top:20px}
-.section-label:first-child{margin-top:0}
+/* Type + sections */
+.h{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.15;margin:28px 0 10px;letter-spacing:-.005em}
+.h:first-child{margin-top:4px}
+.h small{font-family:var(--sans);font-size:13px;color:var(--faint);font-weight:400;margin-left:6px}
+.card{background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:4px 16px;margin-bottom:12px}
+.card.pad{padding:14px 16px}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}
+.row.two{grid-template-columns:1fr auto}
+.num{width:30px;height:30px;border-radius:50%;background:var(--violet-soft);color:var(--violet);display:grid;place-items:center;font-family:var(--serif);font-size:15px;font-weight:500}
+.t{font-size:15px;line-height:1.4}
+.s{font-size:13px;color:var(--muted);margin-top:2px}
+.s.i{font-style:italic}
+.s.v{color:var(--violet)}
+.s.h2{color:var(--honey)}
+.note-line{font-size:13px;color:var(--rose-ink);margin-top:4px;font-style:italic}
 
-.card{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px}
-.card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--lav);margin-bottom:4px}
-.card-sub{font-size:11px;color:rgba(201,184,232,0.5);margin-bottom:12px}
+/* Badges */
+.badge{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap;border:0}
+.b-done,.b-pub,.ch-shaped{background:var(--sage-soft);color:var(--sage)}
+.b-up,.ch-poured{background:var(--honey-soft);color:var(--honey)}
+.b-draft,.ch-blank{background:var(--violet-soft);color:var(--violet)}
+.b-rose{background:var(--rose-soft);color:var(--rose-ink)}
+button.badge{cursor:pointer}
 
-.ep-row{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid rgba(201,184,232,0.08)}
-.ep-row:last-child{border-bottom:none}
-.ep-num{width:28px;height:28px;border-radius:50%;background:rgba(92,61,143,0.4);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--lav);flex-shrink:0;margin-top:2px;font-family:'Cormorant Garamond',serif}
-.ep-title{font-size:13px;color:var(--cream);line-height:1.4}
-.ep-date{font-size:10px;color:rgba(201,184,232,0.4);margin-top:2px}
-.ep-guest{font-size:10px;color:var(--gold);margin-top:2px}
-.ep-cat{font-size:10px;color:rgba(201,184,232,0.4);margin-top:2px}
-.ep-themes{font-size:10px;color:rgba(201,184,232,0.35);margin-top:3px;line-height:1.5;font-style:italic}
-.ep-caption{font-size:10px;color:var(--gold);margin-top:3px;font-style:italic;line-height:1.4}
-.ep-status{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;white-space:nowrap}
-.status-done{background:rgba(214,232,214,0.2);color:var(--sage)}
-.status-progress{background:rgba(201,168,76,0.2);color:var(--gold)}
-.status-planned{background:rgba(92,61,143,0.3);color:var(--lav)}
-.status-open{background:rgba(201,184,232,0.1);color:rgba(201,184,232,0.4)}
-.badge{padding:3px 9px;border-radius:20px;font-size:10px;font-weight:500;white-space:nowrap;border:none;font-family:'DM Sans',sans-serif;flex-shrink:0}
-.b-pub{background:rgba(214,232,214,0.2);color:var(--sage)}
-.b-up{background:rgba(201,168,76,0.15);color:var(--gold)}
-.b-draft{background:rgba(92,61,143,0.25);color:var(--lav)}
+/* Banner */
+.banner{background:var(--rose-soft);border-radius:16px;padding:18px 18px 16px;margin-bottom:16px}
+.banner q{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.3;quotes:none}
+.banner span{display:block;font-size:13px;color:var(--rose-ink);margin-top:6px}
 
-.month-div{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold);letter-spacing:0.08em;padding:16px 0 6px;opacity:0.7}
+/* Next up */
+.next{display:flex;gap:14px;align-items:center;background:var(--violet);color:#fff;border-radius:16px;padding:16px 18px;margin-bottom:16px}
+.next .when{font-family:var(--serif);font-size:30px;line-height:1;min-width:58px;text-align:center}
+.next .when small{display:block;font-family:var(--sans);font-size:12px;opacity:.8;margin-top:4px}
+.next .what{font-size:16px;line-height:1.35}
+.next .what small{display:block;font-size:13px;opacity:.8;margin-top:2px}
+.next.empty{background:var(--violet-soft);color:var(--violet)}
 
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.stat-card{background:rgba(45,27,78,0.6);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--lav);line-height:1}
-.stat-label{font-size:9px;color:rgba(201,184,232,0.4);margin-top:4px;letter-spacing:0.08em;text-transform:uppercase}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px}
+.stat{background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:12px 10px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-weight:500;font-size:30px;line-height:1;color:var(--violet)}
+.stat span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.bar{margin:12px 0 4px}
+.bar-label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:5px}
+.bar-track{height:6px;background:var(--violet-soft);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--violet);border-radius:3px}
 
-.chapter-row{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(201,184,232,0.08)}
-.ch-num{font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(201,184,232,0.3)}
-.ch-title{font-size:13px;color:var(--cream)}
-.ch-sub{font-size:10px;color:rgba(201,184,232,0.4);margin-top:2px}
-.ch-status{padding:3px 8px;border-radius:20px;font-size:10px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
-.ch-poured{background:rgba(201,168,76,0.2);color:var(--gold)}
-.ch-shaped{background:rgba(214,232,214,0.2);color:var(--sage)}
-.ch-blank{background:rgba(92,61,143,0.2);color:rgba(201,184,232,0.4)}
+/* Quick launch */
+.launch{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.launch a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;border-radius:12px;background:var(--white);border:1px solid var(--rule);text-decoration:none;font-size:12px;color:var(--ink);text-align:center;line-height:1.2}
+.launch a:hover{border-color:var(--rose);background:var(--rose-soft)}
+.launch a i{font-style:normal;font-size:20px}
 
-.book-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(201,184,232,0.08)}
-.book-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.book-info{flex:1}
-.book-title{font-size:12px;color:var(--cream)}
-.book-author{font-size:10px;color:rgba(201,184,232,0.4)}
-.book-ep{font-size:10px;color:var(--gold);margin-top:2px}
+/* Checklists */
+.check{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--rule);cursor:pointer;width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left}
+.check:last-child{border-bottom:0}
+.box{width:20px;height:20px;border:1.5px solid var(--rose);border-radius:6px;flex-shrink:0;margin-top:1px;display:grid;place-items:center;color:#fff;font-size:12px}
+.check[aria-checked="true"] .box{background:var(--violet);border-color:var(--violet)}
+.check[aria-checked="true"] .box::after{content:'✓'}
+.check[aria-checked="true"] .t{color:var(--faint);text-decoration:line-through}
 
-.check-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(201,184,232,0.07);cursor:pointer}
-.check-box{width:18px;height:18px;border:1px solid rgba(201,184,232,0.3);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
-.check-box.checked{background:var(--lp);border-color:var(--lp)}
-.check-box.checked::after{content:'✓';font-size:10px;color:white}
-.check-text{font-size:13px;color:var(--cream);line-height:1.4}
-.check-text.done{color:rgba(201,184,232,0.3);text-decoration:line-through}
-.check-area{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-top:2px}
+/* Links */
+.links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.link{display:block;padding:12px 14px;border-radius:12px;background:var(--white);border:1px solid var(--rule);text-decoration:none}
+.link:hover{border-color:var(--rose);background:var(--rose-soft)}
+.link b{display:block;font-weight:500;font-size:14px}
+.link span{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+.links.warm .link{background:var(--cream);border-color:#EFE2D2}
+.links.warm .link:hover{background:var(--honey-soft)}
 
-.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.link-btn{background:rgba(45,27,78,0.6);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;cursor:pointer;text-decoration:none;display:block;transition:all 0.2s}
-.link-btn:hover{border-color:rgba(201,184,232,0.3);background:rgba(92,61,143,0.3)}
-.link-icon{font-size:20px;margin-bottom:4px}
-.link-name{font-size:11px;color:var(--lav)}
-.link-url{font-size:9px;color:rgba(201,184,232,0.3);margin-top:2px}
+/* Tips */
+.tip{background:var(--white);border:1px solid var(--rule);border-left:3px solid var(--rose);border-radius:4px 12px 12px 4px;padding:11px 14px;margin-bottom:8px}
+.tip b{display:block;font-weight:500;font-size:14px;margin-bottom:2px}
+.tip p{font-size:14px;color:var(--muted)}
 
-.guest-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid rgba(201,184,232,0.08);align-items:start}
-.guest-name{font-size:13px;color:var(--cream)}
-.guest-topic{font-size:10px;color:rgba(201,184,232,0.5);margin-top:2px}
-.guest-date{font-size:10px;color:var(--gold)}
-.confirmed{color:var(--sage);font-size:10px}
+/* Sub tabs + filters */
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:14px;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;padding:6px 14px;font-size:13px;border-radius:999px;border:1.5px solid var(--rule);background:var(--white);color:var(--muted);cursor:pointer}
+.chip:hover{border-color:var(--rose)}
+.chip[aria-selected="true"],.chip.active{background:var(--violet);border-color:var(--violet);color:#fff}
+.sub{display:none}.sub.active{display:block}
+.search{width:100%;font:inherit;padding:10px 16px;border:1.5px solid var(--rule);border-radius:999px;background:var(--white);margin-bottom:10px}
+.search:focus{outline:none;border-color:var(--violet)}
 
-.product-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(201,184,232,0.08)}
-.prod-name{font-size:13px;color:var(--cream)}
-.prod-sub{font-size:10px;color:rgba(201,184,232,0.4);margin-top:2px}
-.prod-badge{padding:3px 8px;border-radius:20px;font-size:10px;background:rgba(92,61,143,0.3);color:var(--lav)}
+/* Talks */
+.price{font-weight:500;color:var(--violet);white-space:nowrap}
+.mini-links{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px}
+.mini-links a{font-size:13px;font-weight:500;color:var(--violet);text-underline-offset:3px}
 
-.note-area{width:100%;background:rgba(26,10,46,0.6);border:1px solid rgba(201,184,232,0.15);border-radius:10px;padding:12px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;resize:vertical;min-height:80px;margin-top:8px}
-.note-area::placeholder{color:rgba(201,184,232,0.25)}
-.note-area:focus{outline:none;border-color:rgba(201,184,232,0.35)}
+/* Notes */
+.note{width:100%;background:var(--white);border:1.5px solid var(--rule);border-radius:12px;padding:12px 14px;font:inherit;font-size:15px;line-height:1.6;resize:vertical;min-height:96px}
+.note:focus{outline:none;border-color:var(--violet)}
+.saved{font-size:12px;color:var(--sage);height:18px;margin-top:4px}
 
-.tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;margin-right:4px;margin-top:4px}
-.tag-purple{background:rgba(92,61,143,0.3);color:var(--lav)}
-.tag-gold{background:rgba(201,168,76,0.2);color:var(--gold)}
-.tag-rose{background:rgba(245,208,216,0.2);color:var(--rose)}
-.tag-sage{background:rgba(214,232,214,0.2);color:var(--sage)}
-.tag-teal{background:rgba(200,230,230,0.2);color:var(--teal)}
+/* Lines */
+.lines p{font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.45;padding:10px 0;border-bottom:1px solid var(--rule)}
+.lines p:last-child{border-bottom:0}
+.prompt{padding:11px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.prompt:last-child{border-bottom:0}
+.prompt b{color:var(--violet);font-weight:500}
 
-.intention-banner{background:linear-gradient(135deg,rgba(92,61,143,0.3),rgba(45,27,78,0.5));border:1px solid var(--border-gold);border-radius:12px;padding:16px;margin-bottom:16px;text-align:center}
-.intention-quote{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--lav);line-height:1.5}
-.intention-attr{font-size:10px;color:var(--gold);margin-top:6px;letter-spacing:0.08em}
+/* Topics */
+.topic{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--rule)}
+.topic:last-child{border-bottom:0}
+.topic .t{flex:1;min-width:150px}
+.topic .s{margin:0}
+.topic .future{flex-basis:100%;font-size:13px;color:var(--rose-ink);font-style:italic}
 
-.progress-wrap{margin:12px 0}
-.progress-label{display:flex;justify-content:space-between;font-size:10px;color:rgba(201,184,232,0.4);margin-bottom:5px}
-.progress-bar{height:4px;background:rgba(201,184,232,0.1);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--lp),var(--gold));border-radius:2px}
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:4px 12px;border-radius:999px;font-size:13px}
+.tag.p{background:var(--violet-soft);color:var(--violet)}
+.tag.g{background:var(--honey-soft);color:var(--honey)}
+.tag.r{background:var(--rose-soft);color:var(--rose-ink)}
+.tag.t2{background:var(--teal-soft);color:var(--teal)}
+.tag.s2{background:var(--sage-soft);color:var(--sage)}
 
-.add-btn{display:flex;align-items:center;gap:6px;background:rgba(92,61,143,0.2);border:1px dashed rgba(201,184,232,0.2);border-radius:8px;padding:8px 12px;color:rgba(201,184,232,0.4);font-size:11px;cursor:pointer;width:100%;justify-content:center;margin-top:10px;font-family:'DM Sans',sans-serif}
-.add-btn:hover{color:var(--lav);border-color:rgba(201,184,232,0.35)}
+/* Calendar */
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-head b{font-family:var(--serif);font-weight:500;font-size:22px}
+.cal-nav{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--rule);background:var(--white);cursor:pointer;font-size:16px;color:var(--violet)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-dow{text-align:center;font-size:12px;color:var(--faint);padding:2px 0 4px}
+.day{aspect-ratio:1/1;border-radius:10px;border:0;background:none;font-size:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--ink)}
+.day:hover{background:var(--rose-soft)}
+.day.out{visibility:hidden}
+.day.today{background:var(--violet);color:#fff}
+.day.has::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--rose-ink)}
+.day.today.has::after{background:#fff}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.x{background:none;border:0;color:var(--faint);cursor:pointer;font-size:18px;line-height:1;padding:2px 6px}
+.x:hover{color:var(--rose-ink)}
 
-.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+/* Forms */
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13px;font-weight:500;margin-bottom:4px}
+.field input,.field select,.field textarea{width:100%;font:inherit;padding:10px 12px;border:1.5px solid var(--rule);border-radius:10px;background:var(--white);color:var(--ink)}
+.field textarea{min-height:70px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--violet)}
+.btn{display:inline-block;padding:11px 20px;font-size:15px;font-weight:500;background:var(--violet);color:#fff;border:0;border-radius:999px;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--violet-deep)}
+.btn.ghost{background:none;color:var(--violet);box-shadow:inset 0 0 0 1.5px var(--violet)}
+.btn.full{width:100%}
+.add{width:100%;padding:10px;margin-top:8px;border:1.5px dashed var(--rose);border-radius:12px;background:none;color:var(--violet);cursor:pointer;font-size:14px}
+.add:hover{background:var(--rose-soft)}
+.empty{text-align:center;padding:18px 8px;color:var(--muted);font-size:14px}
 
-/* ALERT */
-.alert{background:rgba(201,168,76,0.1);border:1px solid var(--border-gold);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px}
-.alert-text{font-size:12px;color:var(--cream);line-height:1.6}
-.alert-title{font-size:11px;font-weight:500;color:var(--gold);margin-bottom:2px;letter-spacing:0.04em}
-
-/* TIP */
-.tip{background:rgba(92,61,143,0.15);border-left:2px solid var(--lp);border-radius:0 8px 8px 0;padding:10px 12px;margin-bottom:10px}
-.tip-title{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--lav);margin-bottom:3px;font-weight:500}
-.tip-text{font-size:12px;color:rgba(201,184,232,0.6);line-height:1.6}
-
-/* PODCAST SUB-TABS */
-.sub-tabs-wrap{overflow-x:auto;scrollbar-width:none;margin-bottom:14px}
-.sub-tabs-wrap::-webkit-scrollbar{display:none}
-.sub-tabs{display:flex;gap:4px;min-width:max-content;padding-bottom:2px}
-.sub-tab{padding:6px 14px;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(201,184,232,0.4);cursor:pointer;border-radius:20px;border:1px solid transparent;background:none;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap}
-.sub-tab:hover{color:var(--lav)}
-.sub-tab.active{color:var(--gold);border-color:var(--border-gold);background:rgba(201,168,76,0.08)}
-
-.sub-panel{display:none}
-.sub-panel.active{display:block}
-
-/* TOPIC ROWS */
-.topic-row{display:flex;gap:8px;padding:9px 0;border-bottom:1px solid rgba(201,184,232,0.07);flex-wrap:wrap;align-items:flex-start}
-.topic-row:last-child{border-bottom:none}
-.topic-name{font-size:12px;color:var(--cream);flex:1;min-width:130px;line-height:1.4}
-.topic-ep{font-size:10px;color:rgba(201,184,232,0.4);white-space:nowrap}
-.topic-depth{font-size:10px;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.d-deep{background:rgba(214,232,214,0.2);color:var(--sage)}
-.d-med{background:rgba(201,168,76,0.15);color:var(--gold)}
-.d-surf{background:rgba(201,184,232,0.1);color:rgba(201,184,232,0.5)}
-.topic-future{font-size:10px;color:rgba(201,184,232,0.35);font-style:italic;flex-basis:100%;line-height:1.4}
-
-/* SCHED ROW */
-.sched-row{padding:10px 0;border-bottom:1px solid rgba(201,184,232,0.07);display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
-.sched-row:last-child{border-bottom:none}
-.sched-ep{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold)}
-.sched-title{font-size:12px;color:var(--cream);line-height:1.4}
-.sched-meta{font-size:10px;color:rgba(201,184,232,0.35);margin-top:2px}
-.sched-caption{font-size:11px;color:rgba(201,184,232,0.5);font-style:italic;margin-top:4px;line-height:1.5}
-
-/* SEARCH */
-.search-wrap{margin-bottom:12px}
-.search-wrap input{width:100%;font-size:13px;padding:9px 14px;border:1px solid rgba(201,184,232,0.15);border-radius:24px;background:rgba(26,10,46,0.5);color:var(--cream);font-family:'DM Sans',sans-serif}
-.search-wrap input::placeholder{color:rgba(201,184,232,0.25)}
-.search-wrap input:focus{outline:none;border-color:rgba(201,184,232,0.3)}
-
-.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.filter-btn{padding:5px 12px;font-size:10px;letter-spacing:0.06em;border-radius:20px;border:1px solid rgba(201,184,232,0.15);background:none;color:rgba(201,184,232,0.4);cursor:pointer;font-family:'DM Sans',sans-serif;text-transform:uppercase;transition:all 0.2s}
-.filter-btn.active,.filter-btn:hover{background:rgba(92,61,143,0.3);color:var(--lav);border-color:rgba(201,184,232,0.3)}
-
-/* MODAL */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(10,4,20,0.7);z-index:200;align-items:flex-end;justify-content:center}
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,23,54,.35);z-index:200;align-items:flex-end;justify-content:center}
 .modal-bg.open{display:flex}
-.modal{background:#1e0f38;border:1px solid var(--border);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;max-height:85vh;overflow-y:auto}
-.modal h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--lav);margin-bottom:14px}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,184,232,0.4);margin-bottom:5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;font-size:13px;padding:9px 12px;border:1px solid rgba(201,184,232,0.2);border-radius:8px;background:rgba(26,10,46,0.6);color:var(--cream);font-family:'DM Sans',sans-serif}
-.form-group textarea{min-height:65px;resize:vertical}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--lp)}
-.form-group select option{background:#1a0a2e}
-.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
-.btn-cancel{padding:8px 16px;font-size:12px;border:1px solid var(--border);border-radius:20px;background:none;color:rgba(201,184,232,0.4);cursor:pointer;font-family:'DM Sans',sans-serif}
-.btn-save{padding:8px 18px;font-size:12px;background:var(--lp);color:#fff;border:none;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500}
+.modal{background:var(--sheet);border-radius:20px 20px 0 0;padding:20px 18px 24px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto}
+.modal h3{font-family:var(--serif);font-weight:500;font-size:26px;margin-bottom:14px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
 
-.fab{position:fixed;bottom:24px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--dp);font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;z-index:200;box-shadow:0 4px 20px rgba(201,168,76,0.3)}
+.fab{position:fixed;bottom:22px;right:max(18px,calc(50% - 362px));width:56px;height:56px;border-radius:50%;background:var(--violet);color:#fff;font-size:26px;border:0;cursor:pointer;z-index:150;box-shadow:0 6px 18px rgba(91,58,134,.3);display:none}
+
+@media (min-width:640px){
+  .launch{grid-template-columns:repeat(8,1fr)}
+  .links{grid-template-columns:1fr 1fr 1fr}
+  .panel{padding:24px 28px 110px}
+  .header-row{padding:16px 28px 6px}
+  .tabs{padding:0 20px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
+<div class="app">
 
-<div class="header">
-  <div>
-    <div class="header-title">Hallie Who ✦</div>
-    <div class="header-sub">Creator Dashboard</div>
+<header class="header">
+  <div class="header-row">
+    <div class="wordmark">Hallie Who<small>Creator dashboard</small></div>
+    <div class="header-date" id="hdate"></div>
   </div>
-  <div class="header-date" id="hdate"></div>
-</div>
+  <nav class="tabs" role="tablist" aria-label="Dashboard sections">
+    <button class="tab" role="tab" data-tab="home">Home</button>
+    <button class="tab" role="tab" data-tab="business">Business</button>
+    <button class="tab" role="tab" data-tab="podcast">Podcast</button>
+    <button class="tab" role="tab" data-tab="book">Books</button>
+    <button class="tab" role="tab" data-tab="products">Products</button>
+    <button class="tab" role="tab" data-tab="ember">Ember &amp; Stone</button>
+    <button class="tab" role="tab" data-tab="calendar">Calendar</button>
+    <button class="tab" role="tab" data-tab="links">Links</button>
+  </nav>
+</header>
 
-<div class="tabs-wrap">
-  <div class="tabs">
-    <button class="tab active" onclick="showTab('home',this)">Home</button>
-    <button class="tab" onclick="showTab('podcast',this)">🎙 Podcast</button>
-    <button class="tab" onclick="showTab('book',this)">📖 Book</button>
-    <button class="tab" onclick="showTab('products',this)">✦ Products</button>
-    <button class="tab" onclick="showTab('ember',this)">📦 Ember & Stone</button>
-    <button class="tab" onclick="showTab('links',this)">🔗 Links</button>
-    <button class="tab" onclick="showTab('calendar',this)">🗓 Calendar</button>
-  </div>
-</div>
-
-<div class="panels">
+<main>
 
 <!-- ══ HOME ══ -->
-<div class="panel active" id="panel-home">
-  <div class="intention-banner">
-    <div class="intention-quote" id="daily-intention">"Come inside my inner world."</div>
-    <div class="intention-attr">— Hallie Who</div>
+<section class="panel" id="panel-home" role="tabpanel">
+  <div id="next-up"></div>
+
+  <div class="banner"><q id="daily-intention">Come inside my inner world.</q><span>Today's intention</span></div>
+
+  <h2 class="h">Open fast</h2>
+  <div class="launch">
+    <a href="https://app.cal.com/bookings/upcoming" target="_blank" rel="noopener"><i>📅</i>Bookings</a>
+    <a href="https://admin.mailchimp.com" target="_blank" rel="noopener"><i>✉️</i>Mailchimp</a>
+    <a href="https://www.etsy.com/your/shops/me/dashboard" target="_blank" rel="noopener"><i>🛍</i>Etsy</a>
+    <a href="https://www.podbean.com" target="_blank" rel="noopener"><i>🎙</i>Podbean</a>
+    <a href="https://appstoreconnect.apple.com" target="_blank" rel="noopener"><i>📱</i>App Store</a>
+    <a href="https://app.revenuecat.com" target="_blank" rel="noopener"><i>💳</i>RevenueCat</a>
+    <a href="https://supabase.com/dashboard" target="_blank" rel="noopener"><i>🗄</i>Supabase</a>
+    <a href="https://vercel.com/dashboard" target="_blank" rel="noopener"><i>▲</i>Vercel</a>
   </div>
 
-  <div class="alert">
-    <div style="font-size:16px;flex-shrink:0">✦</div>
-    <div>
-      <div class="alert-title">Recording — April 21, 2026</div>
-      <div class="alert-text">Paul Lamar Hunter · Large family life, multicultural parenting, faith & travel. Co-hosted with Micah. Test Riverside.fm, prep questions, charge mic.</div>
-    </div>
-  </div>
-
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num">21</div><div class="stat-label">Podcast Eps</div></div>
-    <div class="stat-card"><div class="stat-num">49</div><div class="stat-label">Year 1 Goal</div></div>
-    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Book Chapters</div></div>
-  </div>
-
-  <div class="progress-wrap">
-    <div class="progress-label"><span>Year 1 Podcast Progress</span><span>21 / 49 episodes</span></div>
-    <div class="progress-bar"><div class="progress-fill" style="width:43%"></div></div>
-  </div>
-  <div class="progress-wrap">
-    <div class="progress-label"><span>Book Progress</span><span>1 chapter shaped, 6 pours</span></div>
-    <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
-  </div>
-
-  <div class="section-label">Daily Checklist</div>
+  <h2 class="h">Today <small id="checks-count"></small></h2>
   <div class="card" id="daily-checks"></div>
 
-  <div class="section-label">Coming Up</div>
-  <div class="card">
-    <div class="ep-row">
-      <div class="ep-num">22</div>
-      <div>
-        <div class="ep-title">Finding Your Voice — The Stutter Episode</div>
-        <div class="ep-date">Next to record · ⭐ Strongest next episode</div>
-      </div>
-      <span class="ep-status status-progress">Up Next</span>
-    </div>
-    <div class="ep-row">
-      <div class="ep-num" style="font-size:9px">APR</div>
-      <div>
-        <div class="ep-title">GUEST: Paul Lamar Hunter</div>
-        <div class="ep-date">April 21, 2026</div>
-        <div class="ep-guest">Large family · Multicultural parenting · Faith & travel</div>
-      </div>
-      <span class="ep-status status-done">Confirmed ✓</span>
-    </div>
-    <div class="ep-row">
-      <div class="ep-num">Z</div>
-      <div>
-        <div class="ep-title">Guest: Zoe — Sisterhood from Her Side</div>
-        <div class="ep-date">Schedule when ready</div>
-      </div>
-      <span class="ep-status status-planned">Reach Out</span>
-    </div>
+  <h2 class="h">Where things stand</h2>
+  <div class="stats">
+    <div class="stat"><b id="st-eps">0</b><span>Episodes out</span></div>
+    <div class="stat"><b id="st-ch">0</b><span>Chapters poured</span></div>
+    <div class="stat"><b id="st-launch">0</b><span>Site launch steps left</span></div>
   </div>
-</div>
+  <div class="bar"><div class="bar-label"><span>Year one podcast goal</span><span id="pod-goal-label"></span></div><div class="bar-track"><div class="bar-fill" id="pod-goal-fill"></div></div></div>
+  <div class="bar"><div class="bar-label"><span>What Are You</span><span id="book-label"></span></div><div class="bar-track"><div class="bar-fill" id="book-fill"></div></div></div>
+
+  <h2 class="h">Coming up</h2>
+  <div class="card" id="home-events"></div>
+</section>
+
+<!-- ══ BUSINESS ══ -->
+<section class="panel" id="panel-business" role="tabpanel">
+  <h2 class="h">Talk with Hallie <small>cal.com/halliewho</small></h2>
+  <div class="card" id="talks"></div>
+  <p class="s" id="talk-hours" style="margin:-4px 0 4px 2px"></p>
+
+  <h2 class="h">Done-for-you services</h2>
+  <div class="card" id="services"></div>
+
+  <h2 class="h">halliewho.com launch <small>before the December renewal</small></h2>
+  <div class="card" id="launch-checks"></div>
+
+  <h2 class="h">Where inquiries land</h2>
+  <div class="card">
+    <div class="row two"><div><div class="t">Talk bookings</div><div class="s">Cal.com sends the confirmation to you and them</div></div><a class="badge b-draft" href="https://app.cal.com/bookings/upcoming" target="_blank" rel="noopener" style="text-decoration:none">Open</a></div>
+    <div class="row two"><div><div class="t">Collabs and proposals</div><div class="s">links.halliewho.com form, emailed to your Gmail</div></div><a class="badge b-draft" href="https://mail.google.com" target="_blank" rel="noopener" style="text-decoration:none">Open</a></div>
+    <div class="row two"><div><div class="t">Newsletter signups</div><div class="s">Mailchimp, tagged with the topics people pick</div></div><a class="badge b-draft" href="https://admin.mailchimp.com/audience/" target="_blank" rel="noopener" style="text-decoration:none">Open</a></div>
+  </div>
+
+  <h2 class="h">Business notes</h2>
+  <textarea class="note" data-note="business" placeholder="Pricing ideas, client notes, follow-ups..."></textarea>
+  <div class="saved" data-saved="business"></div>
+</section>
 
 <!-- ══ PODCAST ══ -->
-<div class="panel" id="panel-podcast">
+<section class="panel" id="panel-podcast" role="tabpanel">
+  <div class="banner"><q>Your mind is always thinking about something. The question is, is it worth it?</q><span>My Inner Mind podcast</span></div>
 
-  <div class="intention-banner">
-    <div class="intention-quote">"The sister you didn't always have."</div>
-    <div class="intention-attr">— My Sister's Closet</div>
+  <div class="card pad" style="background:var(--cream);border-color:#EFE2D2">
+    <div class="t">Now called <b style="font-weight:500">My Inner Mind</b> <span class="s">(formerly My Sister's Closet)</span></div>
+    <div class="s">Podbean: halliegracehm.podbean.com · Recording on Riverside</div>
+    <div class="s h2" style="margin-top:6px">Plan: after the next series, stop distributing to Podbean, Apple and Spotify and focus on YouTube.</div>
   </div>
 
-  <div class="alert">
-    <div style="font-size:16px;flex-shrink:0">✦</div>
-    <div>
-      <div class="alert-title">Recording — April 21, 2026</div>
-      <div class="alert-text">Paul Lamar Hunter · Co-hosted with Micah. Test Riverside.fm ahead of session. Prep questions around large family life, multicultural parenting, faith & travel.</div>
-    </div>
+  <div class="stats">
+    <div class="stat"><b id="pst-eps">0</b><span>Episodes logged</span></div>
+    <div class="stat"><b id="pst-caps">0</b><span>With captions</span></div>
+    <div class="stat"><b>2</b><span>Series</span></div>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num">21</div><div class="stat-label">Episodes</div></div>
-    <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">With Captions</div></div>
-    <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Topic Areas</div></div>
+  <div class="chips" role="tablist" aria-label="Podcast sections">
+    <button class="chip" role="tab" data-sub="series" aria-selected="true">Series</button>
+    <button class="chip" role="tab" data-sub="episodes">Episodes</button>
+    <button class="chip" role="tab" data-sub="schedule">Captions</button>
+    <button class="chip" role="tab" data-sub="topics">Topics</button>
+    <button class="chip" role="tab" data-sub="guests">Guests</button>
+    <button class="chip" role="tab" data-sub="ideas">Ideas</button>
+    <button class="chip" role="tab" data-sub="podnotes">Notes</button>
   </div>
 
-  <div class="progress-wrap">
-    <div class="progress-label"><span>Season 1 — 49 episodes</span><span>21 / 49</span></div>
-    <div class="progress-bar"><div class="progress-fill" style="width:43%"></div></div>
-  </div>
-
-  <!-- PODCAST SUB-TABS -->
-  <div class="sub-tabs-wrap">
-    <div class="sub-tabs">
-      <button class="sub-tab active" onclick="showSubTab('tips',this)">Tips</button>
-      <button class="sub-tab" onclick="showSubTab('episodes',this)">Episodes</button>
-      <button class="sub-tab" onclick="showSubTab('schedule',this)">Schedule</button>
-      <button class="sub-tab" onclick="showSubTab('topics',this)">Topics</button>
-      <button class="sub-tab" onclick="showSubTab('guests',this)">Guests</button>
-      <button class="sub-tab" onclick="showSubTab('podnotes',this)">Notes</button>
-    </div>
-  </div>
-
-  <!-- TIPS -->
-  <div class="sub-panel active" id="sub-tips">
-    <div class="tip"><div class="tip-title">Fill in early captions</div><div class="tip-text">Episodes 1–14 still say "TBD — fill in" on the Schedule tab. Go through them one by one and add your IG captions: hook + 🎙️ New episode out now. + 💜</div></div>
-    <div class="tip"><div class="tip-title">⭐ Record "Finding Your Voice" next</div><div class="tip-text">You had a stutter. You now host a podcast. Episode 22 writes itself — it ties directly to your whole brand mission.</div></div>
-    <div class="tip"><div class="tip-title">⭐ Your dad's caseworker moment</div><div class="tip-text">"We don't shop for kids." That line needs its own graphic and a full episode. It's the most powerful thing you've said across all 21 episodes.</div></div>
-    <div class="tip"><div class="tip-title">Bring Zoe on next</div><div class="tip-text">You've had Micah and Libby. Zoe is the missing voice. Her perspective on the same sisterhood story will be a completely different episode.</div></div>
-    <div class="tip"><div class="tip-title">AITA & drama format — make it monthly</div><div class="tip-text">Episodes 13 and 14 showed your audience loves the react format. A monthly recurring react segment keeps things light between heavier episodes.</div></div>
-    <div class="tip"><div class="tip-title">Share, hold, replenish — make it a mini series</div><div class="tip-text">Episode 19 introduced your three-part framework. This could become a proper mini series with listener story submissions for each part.</div></div>
-    <div class="section-label">Books Referenced</div>
+  <div class="sub active" id="sub-series">
     <div class="card">
-      <div class="ep-row"><div class="ep-num" style="background:none;color:var(--gold);font-size:14px">✦</div><div><div class="ep-title">101 Essays That Will Change the Way You Think</div><div class="ep-cat">Brianna Wiest · Eps 2, 4, 7, 10, 15, 15B, 17</div></div></div>
-      <div class="ep-row"><div class="ep-num" style="background:none;color:var(--gold);font-size:14px">✦</div><div><div class="ep-title">The Body Keeps the Score</div><div class="ep-cat">Bessel van der Kolk · Ep 18</div></div></div>
-      <div class="ep-row"><div class="ep-num" style="background:none;color:var(--gold);font-size:14px">✦</div><div><div class="ep-title">Theresa Wiseman's 4 Attributes of Empathy</div><div class="ep-cat">Framework · Ep 5</div></div></div>
+      <div class="row"><div class="num">5</div><div><div class="t">The Other Side of Sisterhood</div><div class="s">Ghosting · EQ used as a weapon · Silent treatment, scorekeeping, loyalty tests · Boundaries vs honesty · What sisterhood really is</div></div><span class="badge b-done">Recorded</span></div>
+      <div class="row"><div class="num">→</div><div><div class="t">Why We Keep Choosing Wrong</div><div class="s">Outlined. Content calendar is mapped through early 2027.</div></div><span class="badge b-up">Outlined</span></div>
     </div>
+    <h2 class="h">Caption rules</h2>
+    <div class="tip"><b>Shape</b><p>A hook your listener feels, then 🎙️ New episode out now. 💜</p></div>
+    <div class="tip"><b>Always end with a CTA</b><p>"Drop a 💜 if this hit." · "Save this if you needed it." · "Send this to someone who needs it."</p></div>
+    <div class="tip"><b>Keep it for everyone</b><p>No em dashes. No "sisters" openers. Gender-neutral, for anyone carrying something.</p></div>
+    <div class="tip"><b>Short video scripts</b><p>1) Something you need to know. 2) Why you need to know it. 3) How it helps you.</p></div>
   </div>
 
-  <!-- EPISODES -->
-  <div class="sub-panel" id="sub-episodes">
-    <div class="search-wrap"><input type="text" id="ep-search" placeholder="Search episodes, themes, categories..." oninput="filterEps()"></div>
-    <div class="filter-row">
-      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
-      <button class="filter-btn" onclick="setFilter('EQ',this)">EQ</button>
-      <button class="filter-btn" onclick="setFilter('Mental Health',this)">Mental Health</button>
-      <button class="filter-btn" onclick="setFilter('Sisterhood',this)">Sisterhood</button>
-      <button class="filter-btn" onclick="setFilter('Adoption',this)">Adoption</button>
-      <button class="filter-btn" onclick="setFilter('React',this)">React</button>
-      <button class="filter-btn" onclick="setFilter('Book Club',this)">Book Club</button>
+  <div class="sub" id="sub-episodes">
+    <input class="search" type="search" id="ep-search" placeholder="Search episodes, themes, categories" aria-label="Search episodes">
+    <div class="chips" id="ep-filters">
+      <button class="chip active" data-f="all">All</button>
+      <button class="chip" data-f="EQ">EQ</button>
+      <button class="chip" data-f="Mental Health">Mental health</button>
+      <button class="chip" data-f="Sisterhood">Sisterhood</button>
+      <button class="chip" data-f="Adoption">Adoption</button>
+      <button class="chip" data-f="React">React</button>
+      <button class="chip" data-f="Book Club">Book club</button>
     </div>
     <div id="ep-list" class="card"></div>
-    <button class="add-btn" onclick="openModal()">+ Add new episode</button>
+    <button class="add" type="button" data-open-modal>+ Add an episode</button>
   </div>
 
-  <!-- SCHEDULE -->
-  <div class="sub-panel" id="sub-schedule">
-    <div class="tip"><div class="tip-title">Caption formula</div><div class="tip-text">Hook that stops the scroll + 🎙️ New episode out now. + 💜 — Lead with something your listener feels, not what the episode is about.</div></div>
-    <div class="tip"><div class="tip-title">ManyChat keywords active</div><div class="tip-text">LISTEN → podcast link · JOURNAL → My Inner Mind. Consider adding SHOP for Etsy and FIND for your links page.</div></div>
+  <div class="sub" id="sub-schedule">
+    <div class="tip"><b>Episodes 1 to 14 still need captions</b><p>Add them from the Episodes list with the + button, or keep notes in the Notes tab.</p></div>
     <div id="sched-list"></div>
   </div>
 
-  <!-- TOPICS -->
-  <div class="sub-panel" id="sub-topics">
-    <div class="tip"><div class="tip-title">How to read this</div><div class="tip-text">Green = covered deeply. Gold = surface level — worth a full episode. Faded = just mentioned. Use this to plan without repeating yourself.</div></div>
+  <div class="sub" id="sub-topics">
+    <div class="tip"><b>How to read this</b><p>Deep means covered fully. Surface is worth a full episode. Mention means it came up once. The pink line is the follow-up idea.</p></div>
     <div id="topics-list"></div>
   </div>
 
-  <!-- GUESTS -->
-  <div class="sub-panel" id="sub-guests">
-    <div class="section-label">Confirmed</div>
+  <div class="sub" id="sub-guests">
+    <h2 class="h">Guest ideas</h2>
     <div class="card">
-      <div class="guest-row">
-        <div><div class="guest-name">Paul Lamar Hunter</div><div class="guest-topic">Large family life · Multicultural/mixed-race family · Faith & travel</div></div>
-        <div style="text-align:right"><div class="guest-date">Apr 21, 2026</div><div class="confirmed">✓ Confirmed</div></div>
-      </div>
+      <div class="row two"><div><div class="t">Laney Ruddell (@designbylaney)</div><div class="s">Birmingham creator · outreach drafted</div></div><span class="badge b-up">Outreach</span></div>
+      <div class="row two"><div><div class="t">Heather Brown</div><div class="s">Birmingham creator community</div></div><span class="badge b-draft">Idea</span></div>
+      <div class="row two"><div><div class="t">Zoe</div><div class="s">Family story from her side · first appearance</div></div><span class="badge b-draft">Reach out</span></div>
     </div>
-    <div class="section-label">Outreach</div>
+    <h2 class="h">Past guests</h2>
     <div class="card">
-      <div class="guest-row">
-        <div><div class="guest-name">Laney Ruddell (@designbylaney)</div><div class="guest-topic">Birmingham creator · Outreach drafted</div></div>
-        <span class="badge b-up">Outreach</span>
-      </div>
-      <div class="guest-row">
-        <div><div class="guest-name">Heather Brown</div><div class="guest-topic">Birmingham creator community</div></div>
-        <span class="badge b-draft">Idea</span>
-      </div>
-      <div class="guest-row">
-        <div><div class="guest-name">Zoe (Sister)</div><div class="guest-topic">Sisterhood from her perspective · First Zoe appearance</div></div>
-        <span class="badge b-draft">Reach Out</span>
-      </div>
-      <button class="add-btn">+ Add guest</button>
+      <div class="row two"><div><div class="t">Paul Lamar Hunter</div><div class="s">Large family life · multicultural parenting · faith and travel · with Micah</div></div><span class="badge b-done">Apr 21</span></div>
+      <div class="row two"><div><div class="t">Micah</div><div class="s">Meet Micah, Resilience</div></div><span class="badge b-done">Ep 11</span></div>
+      <div class="row two"><div><div class="t">Libby</div><div class="s">Five Questions, First Dates</div></div><span class="badge b-done">Eps 8, 9</span></div>
     </div>
-    <div class="section-label">Recording Setup</div>
-    <div class="card">
-      <div style="font-size:12px;color:rgba(201,184,232,0.55);line-height:2">
-        <div>Platform: <span style="color:var(--cream)">Riverside.fm</span></div>
-        <div>Backdrop: <span style="color:var(--cream)">Closet — signature visual</span></div>
-        <div>Clips: <span style="color:var(--cream)">Canva 9:16 · serif font · warmth filter · vignette · mic icon</span></div>
-        <div>Hosting: <span style="color:var(--cream)">Podbean → Spotify / Apple / iHeart</span></div>
-        <div>April 21: <span style="color:var(--gold)">Test Riverside before Paul session · Micah co-hosts</span></div>
-      </div>
-    </div>
-    <div class="section-label">ManyChat Keywords</div>
-    <div class="card">
-      <div class="pill-row">
-        <span class="tag tag-gold">LISTEN</span>
-        <span class="tag tag-gold">JOURNAL</span>
-        <span class="tag tag-purple">+ Add Keyword</span>
-      </div>
+    <h2 class="h">Recording setup</h2>
+    <div class="card pad">
+      <div class="s">Platform: <span style="color:var(--ink)">Riverside</span></div>
+      <div class="s">Clips: <span style="color:var(--ink)">Canva 9:16 · serif font · warm filter · vignette · mic icon</span></div>
+      <div class="s">Hosting: <span style="color:var(--ink)">Podbean, moving to YouTube</span></div>
+      <div class="s">ManyChat keywords: <span style="color:var(--ink)">LISTEN, JOURNAL</span></div>
     </div>
   </div>
 
-  <!-- POD NOTES -->
-  <div class="sub-panel" id="sub-podnotes">
-    <div class="section-label">Episode Ideas</div>
+  <div class="sub" id="sub-ideas">
+    <div class="tip"><b>Finding Your Voice: the stutter episode</b><p>You had a stutter. You now host a podcast. It ties straight to the whole mission.</p></div>
+    <div class="tip"><b>Your dad's caseworker moment</b><p>"We don't shop for kids." It deserves its own graphic and a full episode.</p></div>
+    <div class="tip"><b>Monthly AITA react</b><p>Episodes 13 and 14 showed people love the react format. A monthly segment keeps things light between heavier episodes.</p></div>
+    <div class="tip"><b>Share, hold, replenish</b><p>The episode 19 framework could become a mini series with listener stories for each part.</p></div>
+    <div class="tip"><b>Racial identity, a full episode</b><p>Building on episode 21.</p></div>
+    <h2 class="h">Books referenced</h2>
     <div class="card">
-      <div class="ep-row"><div class="ep-num">22</div><div><div class="ep-title">Finding Your Voice — The Stutter Episode</div><div class="ep-cat">Personal / Identity · ⭐ Strongest next episode</div></div><span class="badge b-draft">Idea</span></div>
-      <div class="ep-row"><div class="ep-num">23</div><div><div class="ep-title">Guest: Zoe — Sisterhood from Her Side</div><div class="ep-cat">Sisterhood</div></div><span class="badge b-draft">Idea</span></div>
-      <div class="ep-row"><div class="ep-num">24</div><div><div class="ep-title">101 Essays Continued</div><div class="ep-cat">Book Club · Ongoing series</div></div><span class="badge b-draft">Idea</span></div>
-      <div class="ep-row"><div class="ep-num">25</div><div><div class="ep-title">Racial Identity — A Full Episode</div><div class="ep-cat">Adoption / Identity · Building on Ep 21</div></div><span class="badge b-draft">Idea</span></div>
-      <div class="ep-row"><div class="ep-num">26</div><div><div class="ep-title">Share, Hold, Replenish — Part 2</div><div class="ep-cat">Sisterhood · Mini series potential</div></div><span class="badge b-draft">Idea</span></div>
-      <div class="ep-row"><div class="ep-num">27</div><div><div class="ep-title">Monthly AITA React — Recurring Segment</div><div class="ep-cat">React / Fun</div></div><span class="badge b-draft">Idea</span></div>
-    </div>
-    <div class="section-label">Free Notes</div>
-    <textarea class="note-area" id="pod-note" placeholder="Thoughts, lines worth keeping, ideas..."></textarea>
-    <button onclick="savePodNote()" style="margin-top:8px;padding:8px 18px;background:var(--lp);color:#fff;border:none;border-radius:20px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">Save</button>
-    <div id="pod-note-saved" style="margin-top:6px;font-size:11px;color:var(--sage);display:none">✓ Saved</div>
-  </div>
-
-</div><!-- end podcast panel -->
-
-<!-- ══ BOOK ══ -->
-<div class="panel" id="panel-book">
-  <div class="intention-banner">
-    <div class="intention-quote">"That wanderer — you're not lost. You're only exploring for a while."</div>
-    <div class="intention-attr">— What Are You · Last Line</div>
-  </div>
-  <div class="section-label">What Are You — Chapter Map</div>
-  <div class="card">
-    <div class="chapter-row"><div class="ch-num">1</div><div><div class="ch-title">The Question</div><div class="ch-sub">Skin, family, "what are you," the church, the coat of many colors</div></div><button class="ch-status ch-shaped">Shaped ✓</button></div>
-    <div class="chapter-row"><div class="ch-num">2</div><div><div class="ch-title">The Caretaker</div><div class="ch-sub">Homeschooling, mom's illness, running the house, the stutter, self-harm at six</div></div><button class="ch-status ch-poured">Poured</button></div>
-    <div class="chapter-row"><div class="ch-num">3</div><div><div class="ch-title">The Body</div><div class="ch-sub">The basement, the sleepover, staying to prove yourself, the silence</div></div><button class="ch-status ch-poured">Poured</button></div>
-    <div class="chapter-row"><div class="ch-num">4</div><div><div class="ch-title">The Campus</div><div class="ch-sub">College, the sorority, second assault, the pancake breakfast, the owl tattoo</div></div><button class="ch-status ch-poured">Poured</button></div>
-    <div class="chapter-row"><div class="ch-num">5</div><div><div class="ch-title">The Praise Band</div><div class="ch-sub">Racist jokes, Honduras, the slap, the Bible verse, wiping your feet</div></div><button class="ch-status ch-poured">Poured</button></div>
-    <div class="chapter-row"><div class="ch-num">6</div><div><div class="ch-title">The Lifeline</div><div class="ch-sub">Meeting him, no shoes in the dark, two wounded people clinging</div></div><button class="ch-status ch-poured">Poured</button></div>
-    <div class="chapter-row"><div class="ch-num">7</div><div><div class="ch-title">The Distance</div><div class="ch-sub">Friends who didn't come find you, the separation, the coworker</div></div><button class="ch-status ch-poured">Poured</button></div>
-    <div class="chapter-row"><div class="ch-num">8</div><div><div class="ch-title">All Is Well</div><div class="ch-sub">The second tattoo, six years late, the airport lounge, joy on a walk</div></div><button class="ch-status ch-blank">Not Yet</button></div>
-  </div>
-  <div class="section-label">Lines Worth Keeping</div>
-  <div class="card">
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--lav);font-size:14px;line-height:2.2">
-      "No wonder I developed a stutter — the terror of saying something wrong."<br>
-      "I have always been someone who takes care of others."<br>
-      "He might've been the first one to ever chase me and try to find me in my pain."<br>
-      "I don't wanna be against the world anymore."<br>
-      "All is well. And I will be well."<br>
-      "That wanderer — you're not lost. You're only exploring for a while."
+      <div class="row two"><div><div class="t">101 Essays That Will Change the Way You Think</div><div class="s">Brianna Wiest · Eps 2, 4, 7, 10, 15, 15B, 17</div></div></div>
+      <div class="row two"><div><div class="t">The Body Keeps the Score</div><div class="s">Bessel van der Kolk · Ep 18</div></div></div>
+      <div class="row two"><div><div class="t">Theresa Wiseman's 4 attributes of empathy</div><div class="s">Framework · Ep 5</div></div></div>
     </div>
   </div>
-  <div class="section-label">Next Writing Prompts</div>
-  <div class="card">
-    <div style="font-size:13px;color:var(--cream);line-height:1.7;margin-bottom:10px"><strong style="color:var(--gold)">The Body</strong> — When did you first understand your body was political? What did you do with it to try to fit?</div>
-    <div style="font-size:13px;color:var(--cream);line-height:1.7;margin-bottom:10px"><strong style="color:var(--gold)">The Lifeline</strong> — Who were you when you met him? What were you carrying?</div>
-    <div style="font-size:13px;color:var(--cream);line-height:1.7"><strong style="color:var(--gold)">All Is Well</strong> — When you walk out for the last time, what does the other side feel like?</div>
+
+  <div class="sub" id="sub-podnotes">
+    <textarea class="note" id="pod-note" data-note="pod" placeholder="Thoughts, lines worth keeping, ideas..."></textarea>
+    <div class="saved" data-saved="pod"></div>
   </div>
-  <div class="section-label">Writing Notes</div>
-  <textarea class="note-area" placeholder="Drop a thought, a line, a pour — anything..."></textarea>
-</div>
+</section>
+
+<!-- ══ BOOKS ══ -->
+<section class="panel" id="panel-book" role="tabpanel">
+  <h2 class="h">Underneath a Large Leafy Tree <small>Flamie the owl</small></h2>
+  <div class="card pad" style="background:var(--cream);border-color:#EFE2D2">
+    <div class="s">Picture book · illustrated by Crystal · 8.5 x 8.5 in, 32 pages · paperback and hardcover through IngramSpark · showing as Coming soon on the site</div>
+  </div>
+  <div class="card" id="leafy-checks"></div>
+
+  <h2 class="h">What Are You <small>tap a chapter to change its status</small></h2>
+  <div class="banner" style="margin-top:4px"><q>That wanderer — you're not lost. You're only exploring for a while.</q><span>The last line</span></div>
+  <div class="card" id="chapters"></div>
+
+  <h2 class="h">Lines worth keeping</h2>
+  <div class="card lines">
+    <p>"No wonder I developed a stutter — the terror of saying something wrong."</p>
+    <p>"I have always been someone who takes care of others."</p>
+    <p>"He might've been the first one to ever chase me and try to find me in my pain."</p>
+    <p>"I don't wanna be against the world anymore."</p>
+    <p>"All is well. And I will be well."</p>
+  </div>
+
+  <h2 class="h">Next writing prompts</h2>
+  <div class="card">
+    <div class="prompt"><b>The Body.</b> When did you first understand your body was political? What did you do with it to try to fit?</div>
+    <div class="prompt"><b>The Lifeline.</b> Who were you when you met him? What were you carrying?</div>
+    <div class="prompt"><b>All Is Well.</b> When you walk out for the last time, what does the other side feel like?</div>
+  </div>
+
+  <h2 class="h">Writing notes</h2>
+  <textarea class="note" data-note="book" placeholder="Drop a thought, a line, a pour..."></textarea>
+  <div class="saved" data-saved="book"></div>
+</section>
 
 <!-- ══ PRODUCTS ══ -->
-<div class="panel" id="panel-products">
-  <div class="section-label">Digital Products</div>
+<section class="panel" id="panel-products" role="tabpanel">
+  <h2 class="h">My Inner Mind world</h2>
   <div class="card">
-    <div class="product-row"><div><div class="prod-name">My Inner Mind</div><div class="prod-sub">myinnermind.halliewho.com · Journaling & wellness app</div></div><span class="prod-badge">Live ✓</span></div>
-    <div class="product-row"><div><div class="prod-name">My Inner Grove</div><div class="prod-sub">myinnergrove.halliewho.com · Enchanted forest PWA</div></div><span class="prod-badge">Live ✓</span></div>
-    <div class="product-row"><div><div class="prod-name">My Inner Family</div><div class="prod-sub">Life360 for the soul · In development</div></div><span class="prod-badge" style="background:rgba(201,168,76,0.2);color:var(--gold)">Building</span></div>
-    <div class="product-row"><div><div class="prod-name">Pages for You</div><div class="prod-sub">30-day personalized journal generator · $12</div></div><span class="prod-badge">Live ✓</span></div>
-    <div class="product-row"><div><div class="prod-name">Innershelfstudio</div><div class="prod-sub">Etsy · Wellness printables — SEO optimization needed</div></div><span class="prod-badge" style="background:rgba(245,208,216,0.15);color:var(--rose)">Optimize</span></div>
+    <div class="row two"><div><div class="t">My Inner Mind app</div><div class="s">Live on the App Store · Community $6.99, Off the Record $12.99 · Grove tab with mood check-ins</div></div><span class="badge b-done">Live</span></div>
+    <div class="row two"><div><div class="t">Symptom and habit tracker</div><div class="s">Users build their own trackers, see patterns, export a summary for their doctor</div></div><span class="badge b-up">Planned</span></div>
+    <div class="row two"><div><div class="t">My Inner Grove</div><div class="s">myinnergrove.halliewho.com · to fold into the app as a section</div></div><span class="badge b-done">Live</span></div>
+    <div class="row two"><div><div class="t">My Inner Family</div><div class="s">To fold into the app as a section</div></div><span class="badge b-draft">Building</span></div>
   </div>
-  <div class="section-label">Reading List & Episode Tie-Ins</div>
+
+  <h2 class="h">Hallie Who</h2>
+  <div class="card">
+    <div class="row two"><div><div class="t">Find your pattern</div><div class="s">Six quizzes · email capture · each result recommends a printable</div></div><span class="badge b-done">Live</span></div>
+    <div class="row two"><div><div class="t">Pages for You</div><div class="s">Personalized journal generator · $12</div></div><span class="badge b-done">Live</span></div>
+    <div class="row two"><div><div class="t">Innershelfstudio printables</div><div class="s">Etsy · seasonal pick: 2026 Year in Review + 2027 Intentions, $7</div></div><span class="badge b-done">Live</span></div>
+    <div class="row two"><div><div class="t">Talks and services</div><div class="s">Four conversation options and three done-for-you services</div></div><span class="badge b-done">Live</span></div>
+  </div>
+
+  <h2 class="h">Reading list and episode tie-ins</h2>
   <div class="card" id="book-list"></div>
-  <div class="section-label">Notes</div>
-  <textarea class="note-area" placeholder="Product ideas, updates, to-dos..."></textarea>
-</div>
+
+  <h2 class="h">Notes</h2>
+  <textarea class="note" data-note="products" placeholder="Product ideas, updates, to-dos..."></textarea>
+  <div class="saved" data-saved="products"></div>
+</section>
 
 <!-- ══ EMBER & STONE ══ -->
-<div class="panel" id="panel-ember">
-  <div class="intention-banner">
-    <div class="intention-quote">"Found with Intention."</div>
-    <div class="intention-attr">— Ember & Stone</div>
+<section class="panel" id="panel-ember" role="tabpanel">
+  <div class="banner" style="background:var(--honey-soft)"><q>Found with Intention.</q><span style="color:var(--honey)">Ember &amp; Stone</span></div>
+  <div class="stats">
+    <div class="stat"><b>0</b><span>Waitlist</span></div>
+    <div class="stat"><b>20</b><span>Founding goal</span></div>
+    <div class="stat"><b>TBD</b><span>Launch</span></div>
   </div>
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Waitlist</div></div>
-    <div class="stat-card"><div class="stat-num">20</div><div class="stat-label">Founding Goal</div></div>
-    <div class="stat-card"><div class="stat-num">—</div><div class="stat-label">Launch Date</div></div>
-  </div>
-  <div class="section-label">Box Contents Tracker</div>
+  <h2 class="h">What goes in the box</h2>
   <div class="card">
-    <div class="product-row"><div><div class="prod-name">Intention Stone</div><div class="prod-sub">From your hikes</div></div><span class="prod-badge" style="background:rgba(92,61,143,0.2);color:var(--lav)">Sourcing</span></div>
-    <div class="product-row"><div><div class="prod-name">Thrift Trinket</div><div class="prod-sub">With a handwritten story</div></div><span class="prod-badge" style="background:rgba(92,61,143,0.2);color:var(--lav)">Sourcing</span></div>
-    <div class="product-row"><div><div class="prod-name">Nature Element</div><div class="prod-sub">From your walks</div></div><span class="prod-badge" style="background:rgba(92,61,143,0.2);color:var(--lav)">Sourcing</span></div>
-    <div class="product-row"><div><div class="prod-name">Printable</div><div class="prod-sub">From Innershelfstudio</div></div><span class="prod-badge">Ready</span></div>
-    <div class="product-row"><div><div class="prod-name">Handwritten Note</div><div class="prod-sub">Secret emotional tone</div></div><span class="prod-badge">Ready</span></div>
+    <div class="row two"><div><div class="t">Intention stone</div><div class="s">From your hikes</div></div><span class="badge b-draft">Sourcing</span></div>
+    <div class="row two"><div><div class="t">Thrift trinket</div><div class="s">With a handwritten story</div></div><span class="badge b-draft">Sourcing</span></div>
+    <div class="row two"><div><div class="t">Nature element</div><div class="s">From your walks</div></div><span class="badge b-draft">Sourcing</span></div>
+    <div class="row two"><div><div class="t">Printable</div><div class="s">From Innershelfstudio</div></div><span class="badge b-done">Ready</span></div>
+    <div class="row two"><div><div class="t">Handwritten note</div><div class="s">Carries the secret tone</div></div><span class="badge b-done">Ready</span></div>
   </div>
-  <div class="section-label">Secret Tone — Next Box</div>
-  <div class="card">
-    <div class="pill-row">
-      <span class="tag tag-purple">Nostalgia</span><span class="tag tag-gold">Delight</span>
-      <span class="tag tag-rose">Melancholy</span><span class="tag tag-teal">Wonder</span><span class="tag tag-sage">Laughter</span>
-    </div>
-    <textarea class="note-area" placeholder="Notes for this box's secret tone and theme..." style="min-height:60px;margin-top:12px"></textarea>
-  </div>
-  <div class="section-label">Waitlist Notes</div>
-  <textarea class="note-area" placeholder="Founding 20 names, interest, outreach notes..."></textarea>
-</div>
-
-<!-- ══ LINKS ══ -->
-<div class="panel" id="panel-links">
-  <div class="section-label">Your Platforms</div>
-  <div class="links-grid">
-    <a class="link-btn" href="https://halliewho.com" target="_blank"><div class="link-icon">🌐</div><div class="link-name">halliewho.com</div><div class="link-url">Main site</div></a>
-    <a class="link-btn" href="https://links.halliewho.com" target="_blank"><div class="link-icon">🔗</div><div class="link-name">Links Page</div><div class="link-url">links.halliewho.com</div></a>
-    <a class="link-btn" href="https://myinnermind.halliewho.com" target="_blank"><div class="link-icon">🌿</div><div class="link-name">My Inner Mind</div><div class="link-url">App</div></a>
-    <a class="link-btn" href="https://myinnergrove.halliewho.com" target="_blank"><div class="link-icon">🌲</div><div class="link-name">My Inner Grove</div><div class="link-url">PWA</div></a>
-    <a class="link-btn" href="https://pages-for-you-hallie.vercel.app" target="_blank"><div class="link-icon">📓</div><div class="link-name">Pages for You</div><div class="link-url">Journal generator</div></a>
-    <a class="link-btn" href="https://www.etsy.com/shop/Innershelfstudio" target="_blank"><div class="link-icon">🛍</div><div class="link-name">Innershelfstudio</div><div class="link-url">Etsy shop</div></a>
-    <a class="link-btn" href="https://www.instagram.com/mysistersclosetpod" target="_blank"><div class="link-icon">📷</div><div class="link-name">@mysistersclosetpod</div><div class="link-url">Podcast IG</div></a>
-    <a class="link-btn" href="https://www.instagram.com/halliiegrace" target="_blank"><div class="link-icon">✨</div><div class="link-name">@halliiegrace</div><div class="link-url">Personal IG</div></a>
-  </div>
-  <div class="section-label" style="margin-top:20px">Brand Notes</div>
-  <div class="card">
-    <div style="font-size:12px;color:rgba(201,184,232,0.6);line-height:1.9">
-      <div><span style="color:var(--gold)">Tagline:</span> "Come inside my inner world."</div>
-      <div><span style="color:var(--gold)">Aesthetic:</span> Deep dark purple · Lavender · Cream · Gold</div>
-      <div><span style="color:var(--gold)">Caption formula:</span> Hook + 🎙️ + teaser + 💜</div>
-      <div><span style="color:var(--gold)">Brand identity:</span> The sister people didn't always have</div>
-      <div><span style="color:var(--gold)">Ember & Stone:</span> "Found with Intention."</div>
-      <div><span style="color:var(--gold)">Book title:</span> What Are You</div>
-    </div>
-  </div>
-</div>
+  <h2 class="h">Secret tone for the next box</h2>
+  <div class="tags" style="margin-bottom:10px"><span class="tag p">Nostalgia</span><span class="tag g">Delight</span><span class="tag r">Melancholy</span><span class="tag t2">Wonder</span><span class="tag s2">Laughter</span></div>
+  <textarea class="note" data-note="ember-tone" placeholder="Notes for this box's tone and theme..."></textarea>
+  <div class="saved" data-saved="ember-tone"></div>
+  <h2 class="h">Waitlist notes</h2>
+  <textarea class="note" data-note="ember-waitlist" placeholder="Founding 20 names, interest, outreach..."></textarea>
+  <div class="saved" data-saved="ember-waitlist"></div>
+</section>
 
 <!-- ══ CALENDAR ══ -->
-<div class="panel" id="panel-calendar">
-  <div class="intention-banner">
-    <div class="intention-quote" id="cal-countdown"></div>
-    <div class="intention-attr">— May 30, 2026 · Saturday Sit-Down Event ✦</div>
+<section class="panel" id="panel-calendar" role="tabpanel">
+  <div class="card pad">
+    <div class="cal-head">
+      <button class="cal-nav" type="button" id="cal-prev" aria-label="Previous month">‹</button>
+      <b id="cal-title"></b>
+      <button class="cal-nav" type="button" id="cal-next" aria-label="Next month">›</button>
+    </div>
+    <div class="cal-grid" id="cal-dow"></div>
+    <div class="cal-grid" id="cal-grid"></div>
   </div>
 
-  <div class="section-label">May 2026</div>
-  <div class="card" style="padding:12px">
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px">
-      <div style="text-align:center;font-size:9px;letter-spacing:0.1em;color:rgba(201,184,232,0.4);padding:4px 0">S</div>
-      <div style="text-align:center;font-size:9px;letter-spacing:0.1em;color:rgba(201,184,232,0.4);padding:4px 0">M</div>
-      <div style="text-align:center;font-size:9px;letter-spacing:0.1em;color:rgba(201,184,232,0.4);padding:4px 0">T</div>
-      <div style="text-align:center;font-size:9px;letter-spacing:0.1em;color:rgba(201,184,232,0.4);padding:4px 0">W</div>
-      <div style="text-align:center;font-size:9px;letter-spacing:0.1em;color:rgba(201,184,232,0.4);padding:4px 0">T</div>
-      <div style="text-align:center;font-size:9px;letter-spacing:0.1em;color:rgba(201,184,232,0.4);padding:4px 0">F</div>
-      <div style="text-align:center;font-size:9px;letter-spacing:0.1em;color:rgba(201,184,232,0.4);padding:4px 0">S</div>
-    </div>
-    <div id="may-cal" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px"></div>
-  </div>
+  <h2 class="h">Upcoming</h2>
+  <div class="card" id="events-list"></div>
 
-  <div class="section-label">Upcoming Events</div>
-  <div id="events-list" class="card"></div>
-
-  <div class="section-label">Add Event</div>
-  <div class="card">
-    <div class="form-group" style="margin-bottom:10px">
-      <label style="display:block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,184,232,0.4);margin-bottom:5px">Date</label>
-      <input type="date" id="ev-date" style="width:100%;font-size:13px;padding:9px 12px;border:1px solid rgba(201,184,232,0.2);border-radius:8px;background:rgba(26,10,46,0.6);color:var(--cream);font-family:'DM Sans',sans-serif">
-    </div>
-    <div class="form-group" style="margin-bottom:10px">
-      <label style="display:block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,184,232,0.4);margin-bottom:5px">Event Name</label>
-      <input type="text" id="ev-name" placeholder="e.g. Episode recording, IG live..." style="width:100%;font-size:13px;padding:9px 12px;border:1px solid rgba(201,184,232,0.2);border-radius:8px;background:rgba(26,10,46,0.6);color:var(--cream);font-family:'DM Sans',sans-serif">
-    </div>
-    <div class="form-group" style="margin-bottom:12px">
-      <label style="display:block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,184,232,0.4);margin-bottom:5px">Type</label>
-      <select id="ev-type" style="width:100%;font-size:13px;padding:9px 12px;border:1px solid rgba(201,184,232,0.2);border-radius:8px;background:rgba(26,10,46,0.6);color:var(--cream);font-family:'DM Sans',sans-serif">
-        <option value="event">✦ Event</option>
-        <option value="podcast">🎙 Podcast</option>
-        <option value="content">📱 Content</option>
-        <option value="product">📦 Product</option>
-        <option value="personal">💜 Personal</option>
+  <h2 class="h">Add to the calendar</h2>
+  <div class="card pad">
+    <div class="field"><label for="ev-date">Date</label><input type="date" id="ev-date"></div>
+    <div class="field"><label for="ev-name">What's happening</label><input type="text" id="ev-name" placeholder="Recording, Set It Down Saturday walk, IG live..."></div>
+    <div class="field"><label for="ev-type">Type</label>
+      <select id="ev-type">
+        <option value="event">Event</option><option value="podcast">Podcast</option><option value="content">Content</option>
+        <option value="product">Product</option><option value="personal">Personal</option>
       </select>
     </div>
-    <button onclick="addEvent()" style="width:100%;padding:10px;background:var(--lp);color:#fff;border:none;border-radius:20px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500">Add to Calendar</button>
+    <button class="btn full" type="button" id="ev-add">Add to calendar</button>
+    <p class="s" id="ev-msg" style="margin-top:8px;min-height:1.4em"></p>
   </div>
+  <h2 class="h">Past</h2>
+  <div class="card" id="past-list"></div>
+</section>
+
+<!-- ══ LINKS ══ -->
+<section class="panel" id="panel-links" role="tabpanel">
+  <h2 class="h">What people see</h2>
+  <div class="links">
+    <a class="link" href="https://links.halliewho.com" target="_blank" rel="noopener"><b>Links hub</b><span>links.halliewho.com</span></a>
+    <a class="link" href="https://halliewho-site.vercel.app" target="_blank" rel="noopener"><b>New site</b><span>halliewho-site.vercel.app</span></a>
+    <a class="link" href="https://halliewho.com" target="_blank" rel="noopener"><b>halliewho.com</b><span>Still WordPress</span></a>
+    <a class="link" href="https://halliewho-site.vercel.app/find-your-pattern/" target="_blank" rel="noopener"><b>Quizzes</b><span>Find your pattern</span></a>
+    <a class="link" href="https://halliewho-site.vercel.app/talk-with-hallie/" target="_blank" rel="noopener"><b>Talk with Hallie</b><span>Booking page</span></a>
+    <a class="link" href="https://halliewho-site.vercel.app/work-with-me/" target="_blank" rel="noopener"><b>Work with me</b><span>Services page</span></a>
+    <a class="link" href="https://pages-for-you-hallie.vercel.app" target="_blank" rel="noopener"><b>Pages for You</b><span>Journal generator</span></a>
+    <a class="link" href="https://www.etsy.com/shop/Innershelfstudio" target="_blank" rel="noopener"><b>Innershelfstudio</b><span>Etsy shop</span></a>
+    <a class="link" href="https://www.instagram.com/halliiegrace" target="_blank" rel="noopener"><b>@halliiegrace</b><span>Personal Instagram</span></a>
+  </div>
+  <h2 class="h">My Inner Mind</h2>
+  <div class="links warm">
+    <a class="link" href="https://myinnermind.halliewho.com" target="_blank" rel="noopener"><b>The app</b><span>myinnermind.halliewho.com</span></a>
+    <a class="link" href="https://myinnergrove.halliewho.com" target="_blank" rel="noopener"><b>My Inner Grove</b><span>myinnergrove.halliewho.com</span></a>
+    <a class="link" href="https://halliegracehm.podbean.com" target="_blank" rel="noopener"><b>Podcast</b><span>Podbean</span></a>
+    <a class="link" href="https://open.spotify.com/show/3j1tgy99SsRAI7jT7Lfjmf" target="_blank" rel="noopener"><b>Spotify</b><span>Podcast</span></a>
+    <a class="link" href="https://podcasts.apple.com/us/podcast/my-sisters-closet/id1868743628" target="_blank" rel="noopener"><b>Apple Podcasts</b><span>Podcast</span></a>
+    <a class="link" href="https://www.instagram.com/mysistersclosetpod" target="_blank" rel="noopener"><b>Podcast Instagram</b><span>@mysistersclosetpod</span></a>
+  </div>
+  <h2 class="h">Behind the scenes</h2>
+  <div class="links">
+    <a class="link" href="https://github.com/halliegracehm" target="_blank" rel="noopener"><b>GitHub</b><span>All your repos</span></a>
+    <a class="link" href="https://vercel.com/dashboard" target="_blank" rel="noopener"><b>Vercel</b><span>Site, links hub, apps</span></a>
+    <a class="link" href="https://supabase.com/dashboard" target="_blank" rel="noopener"><b>Supabase</b><span>App database</span></a>
+    <a class="link" href="https://app.revenuecat.com" target="_blank" rel="noopener"><b>RevenueCat</b><span>App subscriptions</span></a>
+    <a class="link" href="https://appstoreconnect.apple.com" target="_blank" rel="noopener"><b>App Store Connect</b><span>My Inner Mind</span></a>
+    <a class="link" href="https://admin.mailchimp.com" target="_blank" rel="noopener"><b>Mailchimp</b><span>Email list</span></a>
+    <a class="link" href="https://app.cal.com/bookings/upcoming" target="_blank" rel="noopener"><b>Cal.com</b><span>Talk bookings</span></a>
+    <a class="link" href="https://resend.com/emails" target="_blank" rel="noopener"><b>Resend</b><span>Form emails</span></a>
+    <a class="link" href="https://riverside.fm/dashboard" target="_blank" rel="noopener"><b>Riverside</b><span>Recording</span></a>
+    <a class="link" href="https://www.etsy.com/your/shops/me/dashboard" target="_blank" rel="noopener"><b>Etsy shop manager</b><span>Listings, orders</span></a>
+    <a class="link" href="https://search.google.com/search-console" target="_blank" rel="noopener"><b>Search Console</b><span>Google</span></a>
+  </div>
+
+  <h2 class="h">Brand notes</h2>
+  <div class="card">
+    <div class="row two"><div><div class="t">Who it's for</div><div class="s">Everyone, gender-neutral. "We can't be sisters until we learn to be human."</div></div></div>
+    <div class="row two"><div><div class="t">Site tagline</div><div class="s">Honest questions for the patterns we carry.</div></div></div>
+    <div class="row two"><div><div class="t">Look</div><div class="s">Light lilac paper, violet, rose, sage · warm cream and honey for the app · Cormorant Garamond and DM Sans</div></div></div>
+    <div class="row two"><div><div class="t">Writing</div><div class="s">No em dashes · every caption ends with a CTA</div></div></div>
+    <div class="row two"><div><div class="t">Ember &amp; Stone</div><div class="s">Found with Intention.</div></div></div>
+  </div>
+</section>
+
+</main>
 </div>
 
-</div><!-- end panels -->
-
-<!-- ADD EPISODE MODAL -->
-<div class="modal-bg" id="modal">
+<!-- ADD EPISODE -->
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal">
-    <h3>Add episode</h3>
-    <div class="form-group"><label>Episode #</label><input id="f-num" placeholder="e.g. 22"></div>
-    <div class="form-group"><label>Title</label><input id="f-title" placeholder="Episode title"></div>
-    <div class="form-group"><label>Category</label>
+    <h3 id="modal-title">Add an episode</h3>
+    <div class="field"><label for="f-num">Episode number</label><input id="f-num" placeholder="22"></div>
+    <div class="field"><label for="f-title">Title</label><input id="f-title"></div>
+    <div class="field"><label for="f-cat">Category</label>
       <select id="f-cat">
         <option>EQ / Inner Work</option><option>Mental Health / Personal</option>
         <option>Sisterhood / Healing</option><option>Adoption / Identity / Race</option>
         <option>Book Club / Inner Work</option><option>React / Fun</option>
-        <option>Sisterhood / Fun</option><option>Personal / Identity</option>
+        <option>Relationships</option><option>Personal / Identity</option>
         <option>Intro / Community</option><option>Other</option>
       </select>
     </div>
-    <div class="form-group"><label>Key themes</label><textarea id="f-themes" placeholder="Main topics covered..."></textarea></div>
-    <div class="form-group"><label>Book / Resource</label><input id="f-resource" placeholder="e.g. 101 Essays — Brianna Wiest"></div>
-    <div class="form-group"><label>Instagram caption</label><textarea id="f-caption" placeholder='"Your hook here. 🎙️ New episode out now. 💜"'></textarea></div>
-    <div class="form-group"><label>Status</label>
-      <select id="f-status"><option value="pub">Published</option><option value="up">Upcoming</option><option value="draft">Draft / Idea</option></select>
+    <div class="field"><label for="f-themes">Key themes</label><textarea id="f-themes"></textarea></div>
+    <div class="field"><label for="f-resource">Book or resource</label><input id="f-resource" placeholder="101 Essays, Brianna Wiest"></div>
+    <div class="field"><label for="f-caption">Instagram caption</label><textarea id="f-caption" placeholder="Hook. 🎙️ New episode out now. 💜 Save this if you needed it."></textarea></div>
+    <div class="field"><label for="f-status">Status</label>
+      <select id="f-status"><option value="pub">Published</option><option value="up">Upcoming</option><option value="draft">Draft or idea</option></select>
     </div>
+    <p class="s" id="f-msg" style="color:var(--rose-ink);min-height:1.4em"></p>
     <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-save" onclick="saveEpisode()">Save</button>
+      <button class="btn ghost" type="button" id="m-cancel">Cancel</button>
+      <button class="btn" type="button" id="m-save">Save episode</button>
     </div>
   </div>
 </div>
 
-<button class="fab" id="fab" onclick="openModal()" style="display:none">+</button>
+<button class="fab" id="fab" type="button" aria-label="Add an episode" data-open-modal>+</button>
 
 <script>
-// ─── DATE ────────────────────────────────────────────────────────────────────
-const d=new Date();
-document.getElementById('hdate').innerHTML=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+'<br>'+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+// ─── Storage (same keys as before, so saved data carries over) ───────────────
+const store={
+  get(k,fb){try{const v=localStorage.getItem(k);return v===null?fb:JSON.parse(v)}catch(e){return fb}},
+  getRaw(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  setRaw(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+};
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const isoDay=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const TODAY=isoDay(new Date());
 
-// ─── MAIN TABS ───────────────────────────────────────────────────────────────
-function showTab(id,btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tabs .tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  if(btn)btn.classList.add('active');
-  document.getElementById('fab').style.display=id==='podcast'?'flex':'none';
-  if(id==='podcast'){renderEps();renderSched();renderTopics()}
+// ─── Header date ─────────────────────────────────────────────────────────────
+function tick(){const d=new Date();$('#hdate').innerHTML=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+'<br>'+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+tick();setInterval(tick,30000);
+
+// ─── Tabs ────────────────────────────────────────────────────────────────────
+function showTab(id){
+  $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+id));
+  $$('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===id)));
+  $('#fab').style.display=id==='podcast'?'block':'none';
+  try{sessionStorage.setItem('hw-tab',id)}catch(e){}
+  if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);
+  window.scrollTo(0,0);
 }
+$$('.tab').forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+$$('.chips[role="tablist"] .chip').forEach(c=>c.addEventListener('click',()=>{
+  $$('.chips[role="tablist"] .chip').forEach(x=>x.setAttribute('aria-selected',String(x===c)));
+  $$('.sub').forEach(s=>s.classList.toggle('active',s.id==='sub-'+c.dataset.sub));
+}));
 
-// ─── PODCAST SUB-TABS ────────────────────────────────────────────────────────
-function showSubTab(id,btn){
-  document.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('sub-'+id).classList.add('active');
-  if(btn)btn.classList.add('active');
-}
-
-// ─── EPISODE DATA ────────────────────────────────────────────────────────────
+// ─── Podcast data (unchanged from the original dashboard) ───────────────────
 const BASE_EPS=[
   {num:"1",title:"My Sister's Closet — Real Talk, Real Healing",cat:"Intro / Community",themes:"Podcast intro, sisterhood as healing, Reddit confession format, breakup regret, forgiveness, community building",resource:"Reddit listener confession",caption:"TBD — fill in",status:"pub"},
   {num:"2",title:"Walk and Reflect: Learning EQ",cat:"EQ / Inner Work",themes:"EQ intro, naming emotions, active listening, adapting communication, self-awareness, processing before reacting",resource:"101 Essays — Brianna Wiest",caption:"TBD — fill in",status:"pub"},
@@ -744,98 +724,70 @@ const SCHED=[
   {num:"21",title:"Being Other",caption:"\"They asked me to leave the room so they could tell the joke. I stayed anyway. 🎙️ New episode out now. 💜\"",builds:"Ep 20",next:"Finding Your Voice"},
 ];
 
-let episodes=JSON.parse(localStorage.getItem('msc-eps')||'null')||BASE_EPS;
+let episodes=store.get('msc-eps',null)||BASE_EPS;
 let activeFilter='all';
-function saveEps(){localStorage.setItem('msc-eps',JSON.stringify(episodes))}
+const saveEps=()=>store.set('msc-eps',episodes);
 
-function setFilter(f,btn){
-  activeFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+$$('#ep-filters .chip').forEach(b=>b.addEventListener('click',()=>{
+  activeFilter=b.dataset.f;
+  $$('#ep-filters .chip').forEach(x=>x.classList.toggle('active',x===b));
   renderEps();
-}
-function filterEps(){renderEps()}
+}));
+$('#ep-search').addEventListener('input',renderEps);
 
+const hasCaption=c=>c&&!/^TBD/.test(c);
 function renderEps(){
-  const q=(document.getElementById('ep-search')?.value||'').toLowerCase();
-  const container=document.getElementById('ep-list');
-  if(!container)return;
-  let filtered=episodes.filter(ep=>{
-    const mq=!q||ep.title.toLowerCase().includes(q)||ep.themes.toLowerCase().includes(q)||ep.cat.toLowerCase().includes(q);
-    const mf=activeFilter==='all'||ep.cat.toLowerCase().includes(activeFilter.toLowerCase());
+  const q=($('#ep-search').value||'').toLowerCase();
+  const list=episodes.filter(ep=>{
+    const mq=!q||[ep.title,ep.themes,ep.cat].join(' ').toLowerCase().includes(q);
+    const mf=activeFilter==='all'||(ep.cat||'').toLowerCase().includes(activeFilter.toLowerCase());
     return mq&&mf;
   });
-  container.innerHTML='';
-  if(!filtered.length){container.innerHTML='<div style="text-align:center;padding:20px;color:rgba(201,184,232,0.3);font-size:13px;">No episodes found</div>';return}
-  filtered.forEach(ep=>{
-    const sm={pub:'b-pub',up:'b-up',draft:'b-draft'};
-    const lm={pub:'Published ✓',up:'Upcoming',draft:'Draft'};
-    const div=document.createElement('div');
-    div.className='ep-row';
-    div.innerHTML=`<div class="ep-num">${ep.num}</div><div><div class="ep-title">${ep.title}</div><div class="ep-cat">${ep.cat}</div>${ep.themes?`<div class="ep-themes">${ep.themes}</div>`:''} ${ep.resource&&ep.resource!=='—'?`<div class="ep-cat" style="margin-top:3px;color:rgba(201,168,76,0.5)">📖 ${ep.resource}</div>`:''} ${ep.caption&&ep.caption!=='TBD — fill in'?`<div class="ep-caption">💜 ${ep.caption}</div>`:''}</div><span class="badge ${sm[ep.status]}">${lm[ep.status]}</span>`;
-    container.appendChild(div);
-  });
+  const sm={pub:'b-pub',up:'b-up',draft:'b-draft'},lm={pub:'Published',up:'Upcoming',draft:'Draft'};
+  $('#ep-list').innerHTML=list.length?list.slice().reverse().map(ep=>`
+    <div class="row"><div class="num">${esc(ep.num)}</div><div>
+      <div class="t">${esc(ep.title)}</div><div class="s">${esc(ep.cat)}</div>
+      ${ep.themes?`<div class="s i">${esc(ep.themes)}</div>`:''}
+      ${ep.resource&&ep.resource!=='—'?`<div class="s h2">📖 ${esc(ep.resource)}</div>`:''}
+      ${hasCaption(ep.caption)?`<div class="note-line">${esc(ep.caption)}</div>`:''}
+    </div><span class="badge ${sm[ep.status]||'b-draft'}">${lm[ep.status]||'Draft'}</span></div>`).join('')
+    :'<div class="empty">No episodes match. Try another word or tap All.</div>';
+  const pub=episodes.filter(e=>e.status==='pub').length;
+  $('#pst-eps').textContent=pub;$('#st-eps').textContent=pub;
+  $('#pst-caps').textContent=episodes.filter(e=>hasCaption(e.caption)).length;
+  $('#pod-goal-label').textContent=`${pub} of 49 episodes`;
+  $('#pod-goal-fill').style.width=Math.min(100,pub/49*100)+'%';
 }
 
 function renderSched(){
-  const container=document.getElementById('sched-list');
-  if(!container)return;
-  container.innerHTML='';
-  const card=document.createElement('div');
-  card.className='card';
-  SCHED.forEach(s=>{
-    const hasCap=s.caption&&s.caption!=='TBD — fill in';
-    const div=document.createElement('div');
-    div.className='sched-row';
-    div.innerHTML=`<div class="sched-ep">${s.num}</div><div><div class="sched-title">${s.title}</div><div class="sched-meta">Builds on: ${s.builds} · Next: ${s.next}</div>${hasCap?`<div class="sched-caption">${s.caption}</div>`:'<div style="font-size:10px;color:rgba(201,184,232,0.25);margin-top:3px;font-style:italic;">Caption — fill in</div>'}</div>`;
-    card.appendChild(div);
-  });
-  container.appendChild(card);
+  $('#sched-list').innerHTML='<div class="card">'+SCHED.map(s=>`
+    <div class="row"><div class="num">${esc(s.num)}</div><div>
+      <div class="t">${esc(s.title)}</div><div class="s">Builds on ${esc(s.builds)} · next: ${esc(s.next)}</div>
+      ${hasCaption(s.caption)?`<div class="note-line">${esc(s.caption)}</div>`:'<div class="s i">Caption still to write</div>'}
+    </div><span></span></div>`).join('')+'</div>';
 }
 
 function renderTopics(){
-  const container=document.getElementById('topics-list');
-  if(!container)return;
-  container.innerHTML='';
   const cats=[...new Set(TOPICS.map(t=>t.cat))];
-  cats.forEach(cat=>{
-    const label=document.createElement('div');
-    label.className='section-label';
-    label.textContent=cat;
-    container.appendChild(label);
-    const card=document.createElement('div');
-    card.className='card';
-    TOPICS.filter(t=>t.cat===cat).forEach(t=>{
-      const dc={deep:'d-deep',med:'d-med',surf:'d-surf'}[t.depth];
-      const dl={deep:'Deep',med:'Surface',surf:'Mention'}[t.depth];
-      const div=document.createElement('div');
-      div.className='topic-row';
-      div.innerHTML=`<div class="topic-name">${t.name}</div><div class="topic-ep">${t.ep}</div><span class="topic-depth ${dc}">${dl}</span><div class="topic-future">→ ${t.future}</div>`;
-      card.appendChild(div);
-    });
-    container.appendChild(card);
-  });
+  const dl={deep:['Deep','b-done'],med:['Surface','b-up'],surf:['Mention','b-draft']};
+  $('#topics-list').innerHTML=cats.map(cat=>`<h2 class="h">${esc(cat)}</h2><div class="card">`+
+    TOPICS.filter(t=>t.cat===cat).map(t=>`<div class="topic"><span class="t">${esc(t.name)}</span><span class="s">${esc(t.ep)}</span><span class="badge ${dl[t.depth][1]}">${dl[t.depth][0]}</span><span class="future">${esc(t.future)}</span></div>`).join('')+'</div>').join('');
 }
 
-function openModal(){document.getElementById('modal').classList.add('open')}
-function closeModal(){document.getElementById('modal').classList.remove('open')}
-
-function saveEpisode(){
-  const num=document.getElementById('f-num').value.trim();
-  const title=document.getElementById('f-title').value.trim();
-  if(!num||!title){alert('Episode number and title are required.');return}
-  episodes.push({num,title,cat:document.getElementById('f-cat').value,themes:document.getElementById('f-themes').value,resource:document.getElementById('f-resource').value||'—',caption:document.getElementById('f-caption').value,status:document.getElementById('f-status').value});
+// Episode modal
+const modal=$('#modal');
+$$('[data-open-modal]').forEach(b=>b.addEventListener('click',()=>{modal.classList.add('open');$('#f-num').focus()}));
+const closeModal=()=>{modal.classList.remove('open');$('#f-msg').textContent=''};
+$('#m-cancel').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+$('#m-save').addEventListener('click',()=>{
+  const num=$('#f-num').value.trim(),title=$('#f-title').value.trim();
+  if(!num||!title){$('#f-msg').textContent='Add an episode number and a title to save.';return}
+  episodes.push({num,title,cat:$('#f-cat').value,themes:$('#f-themes').value,resource:$('#f-resource').value||'—',caption:$('#f-caption').value,status:$('#f-status').value});
   saveEps();closeModal();renderEps();
-  ['f-num','f-title','f-themes','f-resource','f-caption'].forEach(id=>document.getElementById(id).value='');
-}
-
-function savePodNote(){
-  const val=document.getElementById('pod-note').value;
-  localStorage.setItem('msc-pod-note',val);
-  const el=document.getElementById('pod-note-saved');
-  el.style.display='block';
-  setTimeout(()=>el.style.display='none',2000);
-}
+  ['f-num','f-title','f-themes','f-resource','f-caption'].forEach(id=>$('#'+id).value='');
+});
 
 // Reading list
 const books=[
@@ -845,163 +797,175 @@ const books=[
   {title:'Adult Children of Emotionally Immature Parents',author:'Lindsay C. Gibson',ep:'Future',color:'#d6e8d6'},
   {title:'The Mountain Is You',author:'Brianna Wiest',ep:'Future',color:'#fff6dc'},
 ];
-const bl=document.getElementById('book-list');
-if(bl){books.forEach(b=>{bl.innerHTML+=`<div class="book-row"><div class="book-dot" style="background:${b.color}"></div><div class="book-info"><div class="book-title">${b.title}</div><div class="book-author">${b.author}</div><div class="book-ep">${b.ep}</div></div></div>`})}
+$('#book-list').innerHTML=books.map(b=>`<div class="row"><span class="dot" style="background:${b.color};box-shadow:0 0 0 1px var(--rule)"></span><div><div class="t">${esc(b.title)}</div><div class="s">${esc(b.author)} · ${esc(b.ep)}</div></div><span></span></div>`).join('');
 
-// Daily checklist
-const checks=[
-  {text:'Record or prep next episode',area:'Podcast'},
-  {text:'Post or schedule IG content',area:'Social'},
-  {text:'Write one book pour or line',area:'Book'},
-  {text:'Check Etsy listings & SEO',area:'Innershelfstudio'},
-  {text:'Ember & Stone sourcing / notes',area:'Ember & Stone'},
-];
-const dc=document.getElementById('daily-checks');
-const saved=JSON.parse(localStorage.getItem('hw-checks')||'{}');
-checks.forEach((c,i)=>{
-  const isChecked=saved[i]||false;
-  const div=document.createElement('div');
-  div.className='check-item';
-  div.innerHTML=`<div class="check-box ${isChecked?'checked':''}" id="cb-${i}"></div><div><div class="check-text ${isChecked?'done':''}" id="ct-${i}">${c.text}</div><div class="check-area">${c.area}</div></div>`;
-  div.onclick=()=>{
-    const box=document.getElementById('cb-'+i);
-    const txt=document.getElementById('ct-'+i);
-    const now=box.classList.toggle('checked');
-    txt.classList.toggle('done',now);
-    const s=JSON.parse(localStorage.getItem('hw-checks')||'{}');
-    s[i]=now;localStorage.setItem('hw-checks',JSON.stringify(s));
+// ─── Checklists ──────────────────────────────────────────────────────────────
+function checklist(el,items,key,{daily=false,onChange}={}){
+  let state=store.get(key,{});
+  if(daily&&state.day!==TODAY)state={day:TODAY};
+  const draw=()=>{
+    el.innerHTML=items.map((c,i)=>`<button type="button" class="check" role="checkbox" aria-checked="${!!state[i]}" data-i="${i}"><span class="box"></span><span><span class="t">${esc(c.text)}</span>${c.area?`<span class="s" style="display:block">${esc(c.area)}</span>`:''}</span></button>`).join('');
+    $$('.check',el).forEach(b=>b.addEventListener('click',()=>{const i=b.dataset.i;state[i]=!state[i];store.set(key,state);draw()}));
+    onChange&&onChange(items.filter((_,i)=>!state[i]).length,items.length);
   };
-  dc.appendChild(div);
+  draw();
+}
+checklist($('#daily-checks'),[
+  {text:'Record or prep the next episode',area:'Podcast'},
+  {text:'Post or schedule Instagram content',area:'Social'},
+  {text:'Write one book pour or line',area:'Books'},
+  {text:'Check Etsy listings',area:'Innershelfstudio'},
+  {text:'Ember & Stone sourcing or notes',area:'Ember & Stone'},
+  {text:'Check talk bookings and inquiries',area:'Business'},
+  {text:'Check My Inner Mind for new posts and reports',area:'App'}
+],'hw-checks',{daily:true,onChange:(left,total)=>{$('#checks-count').textContent=left?`${total-left} of ${total} done`:'all done 💜'}});
+
+checklist($('#launch-checks'),[
+  {text:'Paste the App Store link into appStoreUrl in site.config.mjs',area:'halliewho-site on GitHub'},
+  {text:'Paste the YouTube channel link into podcastUrl',area:'halliewho-site on GitHub'},
+  {text:'Double-check talk and service prices',area:'site.config.mjs'},
+  {text:'Add the QUIZRES merge field in Mailchimp',area:'So you can see each quiz result'},
+  {text:'Point halliewho.com at Vercel',area:'Vercel, Settings, Domains'},
+  {text:'Change SITE to https://halliewho.com in the links hub',area:'hallie-links, index.html'},
+  {text:'Submit the sitemap in Google Search Console',area:'halliewho.com/sitemap.xml'}
+],'hw-launch',{onChange:left=>{$('#st-launch').textContent=left}});
+
+checklist($('#leafy-checks'),[
+  {text:'Get ISBNs (paperback and hardcover)'},
+  {text:'Download IngramSpark cover templates and fit the spine'},
+  {text:'Add your and Crystal\'s last names'},
+  {text:'Write the dedication'},
+  {text:'Write author and illustrator bios'},
+  {text:'Upload to IngramSpark and order a proof'}
+],'hw-leafy');
+
+// ─── Chapters ────────────────────────────────────────────────────────────────
+const CHAPTERS=[
+  {t:'The Question',s:'Skin, family, "what are you," the church, the coat of many colors',st:'shaped'},
+  {t:'The Caretaker',s:'Homeschooling, mom\'s illness, running the house, the stutter, self-harm at six',st:'poured'},
+  {t:'The Body',s:'The basement, the sleepover, staying to prove yourself, the silence',st:'poured'},
+  {t:'The Campus',s:'College, the sorority, second assault, the pancake breakfast, the owl tattoo',st:'poured'},
+  {t:'The Praise Band',s:'Racist jokes, Honduras, the slap, the Bible verse, wiping your feet',st:'poured'},
+  {t:'The Lifeline',s:'Meeting him, no shoes in the dark, two wounded people clinging',st:'poured'},
+  {t:'The Distance',s:'Friends who didn\'t come find you, the separation, the coworker',st:'poured'},
+  {t:'All Is Well',s:'The second tattoo, six years late, the airport lounge, joy on a walk',st:'blank'}
+];
+const ORDER=['blank','poured','shaped'],CH_LABEL={blank:'Not yet',poured:'Poured',shaped:'Shaped'};
+let chState=store.get('hw-chapters',null)||CHAPTERS.map(c=>c.st);
+function renderChapters(){
+  $('#chapters').innerHTML=CHAPTERS.map((c,i)=>`<div class="row"><div class="num">${i+1}</div><div><div class="t">${esc(c.t)}</div><div class="s">${esc(c.s)}</div></div><button type="button" class="badge ch-${chState[i]}" data-ch="${i}">${CH_LABEL[chState[i]]}</button></div>`).join('');
+  $$('[data-ch]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.ch;chState[i]=ORDER[(ORDER.indexOf(chState[i])+1)%3];store.set('hw-chapters',chState);renderChapters()}));
+  const shaped=chState.filter(s=>s==='shaped').length,poured=chState.filter(s=>s!=='blank').length;
+  $('#st-ch').textContent=`${poured}/8`;
+  $('#book-label').textContent=`${shaped} shaped, ${poured} poured`;
+  $('#book-fill').style.width=((shaped+poured*.5)/(8*1.5)*100)+'%';
+}
+
+// ─── Notes that save as you type ─────────────────────────────────────────────
+$$('textarea[data-note]').forEach(ta=>{
+  const id=ta.dataset.note,key=id==='pod'?'msc-pod-note':'hw-note-'+id;
+  const v=store.getRaw(key);if(v!==null)ta.value=v;
+  let t;ta.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(()=>{store.setRaw(key,ta.value);const s=$(`[data-saved="${id}"]`);if(s){s.textContent='Saved';setTimeout(()=>s.textContent='',1500)}},400)});
 });
 
-// Intentions
-const intentions=['"Come inside my inner world."','"Fitting in is for losers."','"All is well. And I will be well."','"Found with Intention."','"That wanderer — you\'re not lost. You\'re only exploring for a while."','"I have never been able to be anything but myself."'];
-document.getElementById('daily-intention').textContent=intentions[Math.floor(Math.random()*intentions.length)];
+// ─── Intentions ──────────────────────────────────────────────────────────────
+const intentions=['Come inside my inner world.','Fitting in is for losers.','All is well. And I will be well.','Found with Intention.','You\'re not lost. You\'re only exploring for a while.','I have never been able to be anything but myself.','We can\'t be sisters until we learn to be human.'];
+$('#daily-intention').textContent=intentions[Math.floor(Math.random()*intentions.length)];
 
-// Restore pod note
-const podNote=localStorage.getItem('msc-pod-note');
-if(podNote){const ta=document.getElementById('pod-note');if(ta)ta.value=podNote}
-
-// Modal close on bg click
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
-
-// Init episode render
-renderEps();
-
-// ─── CALENDAR ────────────────────────────────────────────────────────────────
-const BASE_EVENTS = [
-  {date:'2026-04-21',name:'Recording: Paul Lamar Hunter (ft. Micah)',type:'podcast'},
-  {date:'2026-05-30',name:'Saturday Sit-Down Event ✦',type:'event'},
+// ─── Calendar ────────────────────────────────────────────────────────────────
+const BASE_EVENTS=[
+  {date:'2026-04-21',name:'Recording: Paul Lamar Hunter (with Micah)',type:'podcast'},
+  {date:'2026-05-30',name:'Set It Down Saturday walk',type:'event'}
 ];
+let calEvents=store.get('hw-events',null)||BASE_EVENTS;
+const saveEvents=()=>store.set('hw-events',calEvents);
+const TYPE={event:['Event','#8E4A5C'],podcast:['Podcast','#5B3A86'],content:['Content','#3E6E78'],product:['Product','#5E7050'],personal:['Personal','#B08060']};
+let view=new Date();view.setDate(1);
 
-let calEvents = JSON.parse(localStorage.getItem('hw-events') || 'null') || BASE_EVENTS;
-function saveEvents(){localStorage.setItem('hw-events',JSON.stringify(calEvents))}
+const fmt=(iso,o)=>new Date(iso+'T12:00:00').toLocaleDateString('en-US',o);
+const daysUntil=iso=>Math.round((new Date(iso+'T12:00:00')-new Date(TODAY+'T12:00:00'))/864e5);
 
-const TYPE_COLORS = {
-  event: {bg:'rgba(201,168,76,0.25)',color:'var(--gold)',dot:'#c9a84c'},
-  podcast: {bg:'rgba(92,61,143,0.35)',color:'var(--lav)',dot:'#5c3d8f'},
-  content: {bg:'rgba(200,230,230,0.2)',color:'var(--teal)',dot:'#c8e6e6'},
-  product: {bg:'rgba(214,232,214,0.2)',color:'var(--sage)',dot:'#d6e8d6'},
-  personal: {bg:'rgba(245,208,216,0.2)',color:'var(--rose)',dot:'#f5d0d8'},
+function eventRow(ev,removable){
+  const [label,color]=TYPE[ev.type]||TYPE.event;
+  const n=daysUntil(ev.date);
+  const when=n===0?'Today':n===1?'Tomorrow':n>1?`In ${n} days`:'';
+  return `<div class="row"><span class="dot" style="background:${color}"></span><div><div class="t">${esc(ev.name)}</div><div class="s">${fmt(ev.date,{weekday:'short',month:'short',day:'numeric'})} · ${label}${when?' · '+when:''}</div></div>${removable?`<button class="x" type="button" aria-label="Remove ${esc(ev.name)}" data-del="${esc(ev.date)}|${esc(ev.name)}">×</button>`:'<span></span>'}</div>`;
+}
+
+function renderCalendar(){
+  $('#cal-dow').innerHTML=['S','M','T','W','T','F','S'].map(d=>`<div class="cal-dow">${d}</div>`).join('');
+  const y=view.getFullYear(),m=view.getMonth();
+  $('#cal-title').textContent=view.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+  const dates=new Set(calEvents.map(e=>e.date));
+  let html='';
+  for(let i=0;i<first;i++)html+='<span class="day out"></span>';
+  for(let d=1;d<=days;d++){
+    const iso=`${y}-${pad(m+1)}-${pad(d)}`;
+    html+=`<button type="button" class="day${iso===TODAY?' today':''}${dates.has(iso)?' has':''}" data-day="${iso}" aria-label="${fmt(iso,{month:'long',day:'numeric'})}${dates.has(iso)?', has events':''}">${d}</button>`;
+  }
+  $('#cal-grid').innerHTML=html;
+  $$('[data-day]').forEach(b=>b.addEventListener('click',()=>{$('#ev-date').value=b.dataset.day;$('#ev-name').focus()}));
+
+  const sorted=[...calEvents].sort((a,b)=>a.date.localeCompare(b.date));
+  const up=sorted.filter(e=>e.date>=TODAY),past=sorted.filter(e=>e.date<TODAY).reverse();
+  $('#events-list').innerHTML=up.length?up.map(e=>eventRow(e,true)).join(''):'<div class="empty">Nothing coming up. Tap a day above to add your next walk or recording.</div>';
+  $('#past-list').innerHTML=past.length?past.slice(0,8).map(e=>eventRow(e,true)).join(''):'<div class="empty">Nothing yet.</div>';
+  $('#home-events').innerHTML=up.length?up.slice(0,4).map(e=>eventRow(e,false)).join(''):'<div class="empty">Nothing on the calendar yet.</div>';
+  $$('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    const [d,n]=b.dataset.del.split('|');
+    const i=calEvents.findIndex(e=>e.date===d&&e.name===n);
+    if(i>-1){calEvents.splice(i,1);saveEvents();renderCalendar()}
+  }));
+
+  const next=up[0],box=$('#next-up');
+  if(next){
+    const n=daysUntil(next.date);
+    box.innerHTML=`<div class="next"><div class="when">${n===0?'Today':n}<small>${n===0?'':n===1?'day':'days'}</small></div><div class="what">${esc(next.name)}<small>${fmt(next.date,{weekday:'long',month:'long',day:'numeric'})}</small></div></div>`;
+  }else{
+    box.innerHTML=`<div class="next empty"><div class="what">Nothing scheduled<small>Add your next walk, recording, or launch in Calendar.</small></div></div>`;
+  }
+}
+$('#cal-prev').addEventListener('click',()=>{view.setMonth(view.getMonth()-1);renderCalendar()});
+$('#cal-next').addEventListener('click',()=>{view.setMonth(view.getMonth()+1);renderCalendar()});
+$('#ev-add').addEventListener('click',()=>{
+  const date=$('#ev-date').value,name=$('#ev-name').value.trim(),type=$('#ev-type').value,msg=$('#ev-msg');
+  if(!date||!name){msg.textContent='Pick a date and add a name to save it.';return}
+  calEvents.push({date,name,type});saveEvents();
+  $('#ev-date').value='';$('#ev-name').value='';
+  msg.textContent=`Added for ${fmt(date,{month:'short',day:'numeric'})}.`;
+  view=new Date(date+'T12:00:00');view.setDate(1);renderCalendar();
+});
+
+// ─── Business: read talks and services live from halliewho-site ─────────────
+const BIZ_FALLBACK={
+  talkHours:'Monday through Wednesday evenings, and weekends',
+  talks:[
+    {name:'10 Minute Talk',price:'$25',length:'10 minutes, by phone',bookings:[{label:'Booking page',url:'https://cal.com/halliewho/15min'}]},
+    {name:'Deep Conversation',price:'$85',length:'50 minutes, by phone or video',bookings:[{label:'Booking page',url:'https://cal.com/halliewho/deepconversation'}]},
+    {name:'Walk & Talk',price:'$45 by phone, $60 in person',length:'25 minutes',bookings:[{label:'By phone',url:'https://cal.com/halliewho/walkandtalk'},{label:'In person',url:'https://cal.com/halliewho/walk-and-talk-in-person'}]},
+    {name:'Monthly Accountability',price:'$125 a month',length:'Two 25-minute calls a month',bookings:[{label:'Booking page',url:'https://cal.com/halliewho/monthly-accountability'}]}
+  ],
+  services:[
+    {name:'Quiz funnel, done for you',price:'Starting at $350',what:'Branded quiz, result pages, email capture'},
+    {name:'Lead magnet page',price:'Starting at $150',what:'One page that trades a freebie for an email'},
+    {name:'Instagram DM automation',price:'Starting at $125',what:'Keyword comment to DM flows'}
+  ]
 };
-const TYPE_LABELS = {event:'✦ Event',podcast:'🎙 Podcast',content:'📱 Content',product:'📦 Product',personal:'💜 Personal'};
-
-function buildMayCal(){
-  const cal = document.getElementById('may-cal');
-  if(!cal) return;
-  cal.innerHTML = '';
-  // May 2026 starts on Friday (day 5, 0=Sun)
-  const startDay = 5;
-  const daysInMay = 31;
-  const eventDates = calEvents
-    .filter(e => e.date.startsWith('2026-05'))
-    .map(e => parseInt(e.date.split('-')[2]));
-
-  // Empty cells before May 1
-  for(let i = 0; i < startDay; i++){
-    cal.innerHTML += `<div></div>`;
-  }
-  for(let day = 1; day <= daysInMay; day++){
-    const hasEvent = eventDates.includes(day);
-    const isSpecial = day === 30;
-    const isToday = (new Date().getMonth() === 4 && new Date().getDate() === day && new Date().getFullYear() === 2026);
-    let style = `text-align:center;padding:6px 2px;border-radius:6px;font-size:12px;cursor:default;position:relative;`;
-    if(isSpecial) style += `background:rgba(201,168,76,0.25);color:var(--gold);font-weight:500;`;
-    else if(isToday) style += `background:rgba(92,61,143,0.4);color:var(--lav);font-weight:500;`;
-    else style += `color:rgba(201,184,232,${hasEvent?'0.9':'0.35'});`;
-    const dot = hasEvent ? `<div style="width:4px;height:4px;border-radius:50%;background:var(--gold);margin:0 auto;margin-top:1px"></div>` : '';
-    cal.innerHTML += `<div style="${style}">${day}${dot}</div>`;
-  }
+function renderBiz(cfg){
+  $('#talks').innerHTML=(cfg.talks||[]).map(t=>`<div class="row two"><div><div class="t">${esc(t.name)}</div><div class="s">${esc(t.length)}</div><div class="mini-links">${(t.bookings||[]).map(b=>`<a href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.label==='Book a time'?'Booking page':b.label)}</a>`).join('')}</div></div><span class="price">${esc(t.price)}</span></div>`).join('');
+  $('#talk-hours').textContent=cfg.talkHours?`Hours shown on the site: ${cfg.talkHours}.`:'';
+  $('#services').innerHTML=(cfg.services||[]).map(s=>`<div class="row two"><div><div class="t">${esc(s.name)}</div><div class="s">${esc(s.what)}</div></div><span class="price">${esc(String(s.price).replace('Starting at ','from '))}</span></div>`).join('')+
+    `<div class="row two"><div><div class="s">Edit prices in site.config.mjs on GitHub. This tab, the site, and the links hub all update.</div></div><a class="badge b-draft" style="text-decoration:none" href="https://github.com/halliegracehm/halliewho-site/edit/main/site.config.mjs" target="_blank" rel="noopener">Edit</a></div>`;
 }
 
-function renderEvents(){
-  const container = document.getElementById('events-list');
-  if(!container) return;
-  const sorted = [...calEvents].sort((a,b) => a.date.localeCompare(b.date));
-  const upcoming = sorted.filter(e => e.date >= new Date().toISOString().split('T')[0]);
-  container.innerHTML = '';
-  if(!upcoming.length){
-    container.innerHTML = '<div style="font-size:12px;color:rgba(201,184,232,0.3);text-align:center;padding:12px">No upcoming events — add one below</div>';
-    return;
-  }
-  upcoming.forEach((ev, i) => {
-    const dt = new Date(ev.date + 'T12:00:00');
-    const dateStr = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-    const c = TYPE_COLORS[ev.type] || TYPE_COLORS.event;
-    const label = TYPE_LABELS[ev.type] || '✦ Event';
-    const div = document.createElement('div');
-    div.style.cssText = `display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(201,184,232,0.07)`;
-    if(i === upcoming.length - 1) div.style.borderBottom = 'none';
-    div.innerHTML = `
-      <div style="width:8px;height:8px;border-radius:50%;background:${c.dot};flex-shrink:0;margin-top:5px"></div>
-      <div style="flex:1">
-        <div style="font-size:13px;color:var(--cream);line-height:1.4">${ev.name}</div>
-        <div style="font-size:10px;color:rgba(201,184,232,0.4);margin-top:2px">${dateStr} · ${label}</div>
-      </div>
-      <button onclick="deleteEvent(${i})" style="background:none;border:none;color:rgba(201,184,232,0.25);cursor:pointer;font-size:14px;padding:2px 6px;flex-shrink:0" title="Remove">×</button>
-    `;
-    container.appendChild(div);
-  });
-}
-
-function addEvent(){
-  const date = document.getElementById('ev-date').value;
-  const name = document.getElementById('ev-name').value.trim();
-  const type = document.getElementById('ev-type').value;
-  if(!date || !name){alert('Please fill in a date and event name.');return}
-  calEvents.push({date,name,type});
-  saveEvents();
-  document.getElementById('ev-date').value = '';
-  document.getElementById('ev-name').value = '';
-  renderEvents();
-  buildMayCal();
-}
-
-function deleteEvent(idx){
-  const sorted = [...calEvents].sort((a,b) => a.date.localeCompare(b.date));
-  const upcoming = sorted.filter(e => e.date >= new Date().toISOString().split('T')[0]);
-  const toRemove = upcoming[idx];
-  calEvents = calEvents.filter(e => !(e.date === toRemove.date && e.name === toRemove.name));
-  saveEvents();
-  renderEvents();
-  buildMayCal();
-}
-
-function buildCountdown(){
-  const el = document.getElementById('cal-countdown');
-  if(!el) return;
-  const target = new Date('2026-05-30T00:00:00');
-  const now = new Date();
-  const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
-  if(diff > 0) el.textContent = diff + ' days until your Saturday Sit-Down Event';
-  else if(diff === 0) el.textContent = 'Today is the day ✦ Saturday Sit-Down Event';
-  else el.textContent = 'Saturday Sit-Down Event — complete ✓';
-}
-
-// Run calendar on init
-buildCountdown();
-buildMayCal();
-renderEvents();
+// ─── Start ───────────────────────────────────────────────────────────────────
+renderEps();renderSched();renderTopics();renderChapters();renderCalendar();renderBiz(BIZ_FALLBACK);
+import('https://cdn.jsdelivr.net/gh/halliegracehm/halliewho-site@main/site.config.mjs')
+  .then(m=>{if(m&&m.default)renderBiz({...BIZ_FALLBACK,...m.default})}).catch(()=>{});
+let start='home';
+try{start=(location.hash||'').slice(1)||sessionStorage.getItem('hw-tab')||'home'}catch(e){}
+showTab($('#panel-'+start)?start:'home');
 </script>
 </body>
 </html>

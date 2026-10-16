@@ -152,6 +152,15 @@ button.badge{cursor:pointer}
 .prompt{padding:11px 0;border-bottom:1px solid var(--rule);font-size:15px}
 .prompt:last-child{border-bottom:0}
 .prompt b{color:var(--violet);font-weight:500}
+.qs summary{cursor:pointer;padding:12px 0;font-size:15px;color:var(--violet);font-weight:500;list-style:none}
+.qs summary::-webkit-details-marker{display:none}
+.qs summary::after{content:" +";color:var(--faint)}
+.qs[open] summary::after{content:" \2212"}
+.qs{border-bottom:1px solid var(--rule)}
+.qs:last-child{border-bottom:0}
+.qs ol{margin:0 0 12px;padding-left:22px;font-size:15px;line-height:1.5}
+.qs li{padding:3px 0}
+
 
 /* Topics */
 .topic{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--rule)}
@@ -461,6 +470,52 @@ button.badge{cursor:pointer}
   <h2 class="h">Writing notes</h2>
   <textarea class="note" data-note="book" placeholder="Drop a thought, a line, a pour..."></textarea>
   <div class="saved" data-saved="book"></div>
+
+  <h2 class="h">Can You See It My Way? <small>researching</small></h2>
+  <div class="card pad" style="background:var(--cream);border-color:#EFE2D2">
+    <div class="t">How we picture, store, and pull information from our minds</div>
+    <div class="s">Series first, book later. Interviewing coworkers and people around me about what they see in their mind, whether they can picture an apple, what color numbers and days are, and how they see the calendar. Same input, very different conclusions. Goal: log 30 to 50 people, then look for patterns that become chapters.</div>
+  </div>
+
+  <h2 class="h">The log so far <small>as of Oct 16, 2026</small></h2>
+  <div class="card">
+    <div class="row two"><div><div class="t">What your mind looks like</div><div class="s">Filing cabinet: 6 to 7 · rows of stacked filing cabinets (SpongeBob brain): 1 · library: 1 · bookshelves: 1 · totes: 1 · desk: 1 · forest or grove: 1</div></div><span class="badge b-draft">Mind</span></div>
+    <div class="row two"><div><div class="t">Can you picture an apple?</div><div class="s">Can't picture at all: 2 · sometimes yes, sometimes no: 1 · likely aphantasia, one possible partial subtype</div></div><span class="badge b-draft">Apple</span></div>
+    <div class="row two"><div><div class="t">What color is 33?</div><div class="s">Pink: 2 · purple: 2 · blue: 1</div></div><span class="badge b-draft">33</span></div>
+    <div class="row two"><div><div class="t">Thursday</div><div class="s">Orange: 3 to 4 people</div></div><span class="badge b-draft">Days</span></div>
+    <div class="row two"><div><div class="t">The year 2027</div><div class="s">Orange: at least 1</div></div><span class="badge b-draft">Years</span></div>
+  </div>
+
+  <h2 class="h">Interview questions <small>tap a group to open</small></h2>
+  <div class="card">
+    <details class="qs"><summary>Your mind's eye</summary><ol><li>Picture an apple. On a scale of 1 to 5, how clear is it? Color or black and white?</li><li>Can you rotate it, take a bite, or change its color?</li><li>When you read a book, does it play like a movie?</li><li>Can you picture the face of someone you love right now?</li><li>Do you dream in color?</li></ol></details>
+    <details class="qs"><summary>Your mind's ear, nose and mouth</summary><ol><li>Can you "hear" a song playing in your head?</li><li>Do you have an inner voice? Is it your voice or someone else's?</li><li>Can you imagine the smell of coffee or the taste of a lemon?</li></ol></details>
+    <details class="qs"><summary>Time and numbers</summary><ol><li>What shape is your year? A circle, a line, a ladder?</li><li>Which direction does your week go: left to right, up and down, around?</li><li>Do numbers have colors? Letters? Your name?</li><li>Do days or numbers have personalities? (Is 7 grumpy? Is Monday bossy?)</li></ol></details>
+    <details class="qs"><summary>How you see the calendar year</summary><ol><li>Close your eyes and think of the whole year. What shape is it? (circle, oval, line, zigzag, spiral, staircase)</li><li>Where are you standing in it right now? Inside it, above it, or looking at it from the side?</li><li>Which direction does it move? Clockwise, counterclockwise, left to right, up and down?</li><li>Where does the year start? Is January at the top, the bottom, the left?</li><li>Are all the months the same size, or are some bigger or longer?</li><li>Do the months have colors? Which ones?</li><li>Do holidays or your birthday stick out in a special spot?</li><li>Can you see the next year (2027) coming? What does it look like from here?</li><li>How do you see a single week? A row of boxes, a loop, a list?</li><li>When you think of a decade (the 1990s, the 2020s), where is it located?</li></ol></details>
+    <details class="qs"><summary>How you see your mind</summary><ol><li>When you pull up a memory, what does your mind look like? (filing cabinet, library, desk, forest, something else)</li><li>Is it neat and organized or messy and piled up?</li><li>Are you walking through it, sitting in it, or looking at it from outside?</li><li>Is it bright or dim? Indoors or outdoors?</li><li>When you forget something, what happens in that space? Is a drawer stuck, a book missing, a path overgrown?</li><li>Where do you keep new information versus old memories?</li><li>Are sad or hard memories stored somewhere different?</li><li>Has your mind's space changed since you were a kid?</li><li>If someone else walked into your mind, what would they notice first?</li><li>If you could redecorate it, what would you change?</li></ol></details>
+    <details class="qs"><summary>How you find things</summary><ol><li>Giving directions, do you see a map or remember landmarks?</li><li>When you spell a hard word, do you see it written out?</li><li>How do you remember a phone number: see it, hear it, or feel the pattern?</li></ol></details>
+    <details class="qs"><summary>Feelings</summary><ol><li>Do emotions have colors?</li><li>Where do you feel stress in your body?</li><li>When you remember a happy memory, are you in it or watching it?</li></ol></details>
+  </div>
+
+  <h2 class="h">What the research says</h2>
+  <div class="card">
+    <div class="prompt"><b>Aphantasia.</b> Named in 2015. Faint or no mental images, roughly 2 to 3 in 100 people. Hyperphantasia is the opposite: images as vivid as real seeing. Neither is a disorder, both run in families, and there are subtypes. (Eye's Mind, University of Edinburgh; aphantasia.com)</div>
+    <div class="prompt"><b>Colored days, months and numbers.</b> A form of synesthesia. Colors stay consistent for one person but differ between people. Seeing the calendar or numbers laid out in space may affect around 10 percent of people. (University of Sussex synaesthesia research)</div>
+    <div class="prompt"><b>Inner voice.</b> Some people have no inner monologue (anendophasia). Russell Hurlburt's research suggests inner speech is rarer than people think.</div>
+    <div class="prompt"><b>Others talking about it.</b> NPR TED Radio Hour on the mind's eye and inner monologue, Aella's synesthesia color survey of about 450 people, plus lots of TikTok and Substack posts. Most are academic or one person's story. A crowd answering the same question is the gap.</div>
+  </div>
+
+  <h2 class="h">Next steps</h2>
+  <div class="card">
+    <div class="prompt"><b>Keep logging.</b> Ask every new person the apple, 33, Thursday, calendar and mind questions so answers compare.</div>
+    <div class="prompt"><b>Stories and reels.</b> Post one question at a time as "Can you see it my way?" and collect answers in the comments.</div>
+    <div class="prompt"><b>Podcast tie-in.</b> A My Inner Mind episode on how differently we see the same thing.</div>
+    <div class="prompt"><b>Book.</b> Once there are 30 to 50 people, sort answers into patterns and outline chapters.</div>
+  </div>
+
+  <h2 class="h">Research notes</h2>
+  <textarea class="note" data-note="seeit" placeholder="New answers, patterns you notice, people to ask..."></textarea>
+  <div class="saved" data-saved="seeit"></div>
 </section>
 
 <!-- ══ PRODUCTS ══ -->
